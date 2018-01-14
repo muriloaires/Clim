@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Clim</string>
+    <string name="algo_errado_ocorreu">Algo errado ocorreu</string>
 </resources>
