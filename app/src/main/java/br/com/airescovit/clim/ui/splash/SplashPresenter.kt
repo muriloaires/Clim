@@ -1,5 +1,6 @@
 package br.com.airescovit.clim.ui.splash
 
+import android.os.Handler
 import br.com.airescovit.clim.data.DataManager
 import br.com.airescovit.clim.ui.base.BasePresenter
 import javax.inject.Inject
@@ -11,7 +12,9 @@ class SplashPresenter<V : SplashMvpView> @Inject constructor(var dataManager: Da
 
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
-        decideNextActivity()
+        Handler().postDelayed({
+            decideNextActivity()
+        }, 1500)
     }
 
     private fun decideNextActivity() {

@@ -26,7 +26,7 @@ import butterknife.Unbinder
 /**
  * Created by Logics on 10/01/2018.
  */
-abstract class BaseActivity : AppCompatActivity(), MvpView {
+abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callback {
 
     var mProgressDialog: ProgressDialog? = null
     private var mUnBinder: Unbinder? = null
@@ -57,6 +57,7 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
             requestPermissions(permissions, requestCode)
         }
     }
+
 
     override fun showLoading() {
         hideLoading()
@@ -128,5 +129,13 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
             mUnBinder!!.unbind()
 
         super.onDestroy()
+    }
+
+    override fun onFragmentAttached() {
+
+    }
+
+    override fun onFragmentDetached(tag: String) {
+
     }
 }

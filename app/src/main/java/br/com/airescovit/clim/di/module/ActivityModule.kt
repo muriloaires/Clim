@@ -6,6 +6,9 @@ import br.com.airescovit.clim.data.AppDataManager
 import br.com.airescovit.clim.data.DataManager
 import br.com.airescovit.clim.di.ActivityContext
 import br.com.airescovit.clim.di.PerActivity
+import br.com.airescovit.clim.ui.login.LoginMvpPresenter
+import br.com.airescovit.clim.ui.login.LoginMvpView
+import br.com.airescovit.clim.ui.login.LoginPresenter
 import br.com.airescovit.clim.ui.splash.SplashMvpPresenter
 import br.com.airescovit.clim.ui.splash.SplashMvpView
 import br.com.airescovit.clim.ui.splash.SplashPresenter
@@ -34,6 +37,12 @@ class ActivityModule(activity: AppCompatActivity) {
     @PerActivity
     @Provides
     fun provideSplashPresenter(presenter: SplashPresenter<SplashMvpView>): SplashMvpPresenter<SplashMvpView> {
+        return presenter
+    }
+
+    @PerActivity
+    @Provides
+    fun provideLoginPresenter(presenter: LoginPresenter<LoginMvpView>): LoginMvpPresenter<LoginMvpView> {
         return presenter
     }
 

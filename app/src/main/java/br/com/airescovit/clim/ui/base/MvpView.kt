@@ -13,7 +13,7 @@ interface MvpView {
 
     fun openActivityOnTokenExpire()
 
-    fun onError(@StringRes restId: Int)
+    fun onError(@StringRes resId: Int)
 
     fun onError(error: String?)
 
