@@ -11,10 +11,6 @@ import javax.inject.Singleton
 @Singleton
 class AppDbHelper @Inject constructor(dbOpenHelper: DbOpenHelper): DbHelper {
 
-    private lateinit var mDaoSession: DaoSession
-
-    init {
-        mDaoSession = DaoMaster(dbOpenHelper.writableDatabase).newSession()
-    }
+    private var mDaoSession: DaoSession = DaoMaster(dbOpenHelper.writableDatabase).newSession()
 
 }

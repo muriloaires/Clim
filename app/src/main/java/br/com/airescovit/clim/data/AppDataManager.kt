@@ -14,17 +14,10 @@ import javax.inject.Singleton
 @Singleton
 class AppDataManager @Inject constructor(@ApplicationContext context: Context, dbHelper: DbHelper, preferenceHelper: PreferenceHelper, apiHelper: ApiHelper) : DataManager {
 
-    private var mContext: Context
-    private var mDbHelper: DbHelper
-    private var mPreferencesHelper: PreferenceHelper
-    private var mApiHelper: ApiHelper
-
-    init {
-        mContext = context
-        mDbHelper = dbHelper
-        mPreferencesHelper = preferenceHelper
-        mApiHelper = apiHelper
-    }
+    private var mContext: Context = context
+    private var mDbHelper: DbHelper = dbHelper
+    private var mPreferencesHelper: PreferenceHelper = preferenceHelper
+    private var mApiHelper: ApiHelper = apiHelper
 
     override fun setUserAsLoggedOut() {
         updateUserInfo(null, null, DataManager.LoginMode.LOGGED_IN_MODE_LOGGED_OUT, null, null)

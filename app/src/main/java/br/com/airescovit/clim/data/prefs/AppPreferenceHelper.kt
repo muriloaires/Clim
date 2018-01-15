@@ -7,10 +7,12 @@ import br.com.airescovit.clim.di.ApplicationContext
 import br.com.airescovit.clim.di.PreferenceInfo
 import br.com.airescovit.clim.utils.AppConstants
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by Logics on 12/01/2018.
  */
+@Singleton
 class AppPreferenceHelper @Inject constructor(@ApplicationContext context: Context, @PreferenceInfo prefFileName: String) : PreferenceHelper {
 
     private var mPref: SharedPreferences = context.getSharedPreferences(prefFileName, Context.MODE_PRIVATE)
@@ -19,7 +21,6 @@ class AppPreferenceHelper @Inject constructor(@ApplicationContext context: Conte
     private val PREF_KEY_CURRENT_USER_ID = "PREF_KEY_CURRENT_USER_ID"
     private val PREF_KEY_CURRENT_USER_NAME = "PREF_KEY_CURRENT_USER_NAME"
     private val PREF_KEY_CURRENT_USER_EMAIL = "PREF_KEY_CURRENT_USER_EMAIL"
-    private val PREF_KEY_CURRENT_USER_PROFILE_PIC_URL = "PREF_KEY_CURRENT_USER_PROFILE_PIC_URL"
     private val PREF_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN"
 
     override fun getCurrentUserId(): Long {

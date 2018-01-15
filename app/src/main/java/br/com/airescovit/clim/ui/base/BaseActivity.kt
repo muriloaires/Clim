@@ -6,10 +6,10 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
@@ -33,12 +33,13 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
     private lateinit var mActivityComponent: ActivityComponent
 
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         mActivityComponent = DaggerActivityComponent.builder()
                 .activityModule(ActivityModule(this))
                 .applicationComponent((application as ClimApp).mApplicationComponent)
                 .build()
+        Log.d("", "")
     }
 
     fun getActivityComponent(): ActivityComponent {
@@ -118,7 +119,7 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
         //startActivity()
     }
 
-    fun setUnbinder(unbinder: Unbinder){
+    fun setUnbinder(unbinder: Unbinder) {
         this.mUnBinder = unbinder
     }
 

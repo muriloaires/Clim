@@ -1,7 +1,7 @@
 package br.com.airescovit.clim.ui.splash
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import br.com.airescovit.clim.R
 import br.com.airescovit.clim.ui.base.BaseActivity
 import butterknife.ButterKnife
@@ -11,7 +11,7 @@ class Splash : BaseActivity(), SplashMvpView {
 
 
     @Inject
-    public var mPresenter: SplashMvpPresenter<SplashMvpView>? = null
+    lateinit var mPresenter: SplashMvpPresenter<SplashMvpView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,10 +22,10 @@ class Splash : BaseActivity(), SplashMvpView {
     }
 
     override fun openLoginActivity() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(this, "WOW", Toast.LENGTH_SHORT).show()
     }
 
     override fun openMainActivity() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(this, "WOW", Toast.LENGTH_SHORT).show()
     }
 }

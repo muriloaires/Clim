@@ -7,6 +7,8 @@ import br.com.airescovit.clim.data.AppDataManager
 import br.com.airescovit.clim.data.DataManager
 import br.com.airescovit.clim.data.db.AppDbHelper
 import br.com.airescovit.clim.data.db.DbHelper
+import br.com.airescovit.clim.data.network.ApiHelper
+import br.com.airescovit.clim.data.network.AppApiHelper
 import br.com.airescovit.clim.data.prefs.AppPreferenceHelper
 import br.com.airescovit.clim.data.prefs.PreferenceHelper
 import br.com.airescovit.clim.di.ApplicationContext
@@ -21,10 +23,12 @@ import javax.inject.Singleton
  * Created by Logics on 12/01/2018.
  */
 @Module
-class ApplicationModule(val application: ClimApp) {
+class ApplicationModule(val application: Application) {
+
     @Provides
-    @Singleton
-    fun provideApplication() = application
+    fun provideApplication(): Application{
+        return application
+    }
 
     @Provides
     @ApplicationContext
@@ -61,5 +65,11 @@ class ApplicationModule(val application: ClimApp) {
     @Singleton
     fun providePreferenceHelper(appPreferenceHelper: AppPreferenceHelper): PreferenceHelper {
         return appPreferenceHelper
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideApiHelper(appApiHelper: AppApiHelper): ApiHelper {
+        return appApiHelper
     }
 }

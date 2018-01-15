@@ -3,6 +3,7 @@ package br.com.airescovit.clim.di.component
 import android.app.Application
 import android.content.Context
 import br.com.airescovit.clim.ClimApp
+import br.com.airescovit.clim.data.DataManager
 import br.com.airescovit.clim.di.ApplicationContext
 import br.com.airescovit.clim.di.module.ApplicationModule
 import dagger.Component
@@ -21,4 +22,6 @@ interface ApplicationComponent {
     fun context(): Context
 
     fun application(): Application
+
+    fun getDataManager(): DataManager
 }

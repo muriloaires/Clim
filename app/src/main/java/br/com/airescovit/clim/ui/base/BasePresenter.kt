@@ -6,9 +6,7 @@ import javax.inject.Inject
 /**
  * Created by Logics on 12/01/2018.
  */
-open class BasePresenter <in V : MvpView> @Inject constructor(dataManager: DataManager) : MvpPresenter<V> {
-
-     var mDataManager: DataManager = dataManager
+open class BasePresenter<V : MvpView> : MvpPresenter<V> {
 
     private var mMvpView: V? = null
     override fun onAttach(mvpView: V) {
@@ -31,7 +29,7 @@ open class BasePresenter <in V : MvpView> @Inject constructor(dataManager: DataM
         return mMvpView != null
     }
 
-    fun getMvpView(): MvpView? {
+    fun getMvpView(): V? {
         return mMvpView
     }
 }

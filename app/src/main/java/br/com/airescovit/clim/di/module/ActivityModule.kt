@@ -2,6 +2,8 @@ package br.com.airescovit.clim.di.module
 
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
+import br.com.airescovit.clim.data.AppDataManager
+import br.com.airescovit.clim.data.DataManager
 import br.com.airescovit.clim.di.ActivityContext
 import br.com.airescovit.clim.di.PerActivity
 import br.com.airescovit.clim.ui.splash.SplashMvpPresenter
@@ -34,5 +36,6 @@ class ActivityModule(activity: AppCompatActivity) {
     fun provideSplashPresenter(presenter: SplashPresenter<SplashMvpView>): SplashMvpPresenter<SplashMvpView> {
         return presenter
     }
+
 
 }
