@@ -6,7 +6,6 @@ import android.widget.Toast
 import br.com.airescovit.clim.R
 import br.com.airescovit.clim.ui.base.BaseActivity
 import br.com.airescovit.clim.ui.login.LoginActivity
-import butterknife.ButterKnife
 import javax.inject.Inject
 
 class Splash : BaseActivity(), SplashMvpView {
@@ -19,7 +18,6 @@ class Splash : BaseActivity(), SplashMvpView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         getActivityComponent().inject(this)
-        setUnbinder(ButterKnife.bind(this))
         mPresenter!!.onAttach(this)
     }
 
@@ -30,4 +28,7 @@ class Splash : BaseActivity(), SplashMvpView {
     override fun openMainActivity() {
         Toast.makeText(this, "WOW", Toast.LENGTH_SHORT).show()
     }
+
+
+
 }

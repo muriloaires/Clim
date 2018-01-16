@@ -1,6 +1,5 @@
 package br.com.airescovit.clim.ui.login
 
-import br.com.airescovit.clim.data.DataManager
 import br.com.airescovit.clim.ui.base.BasePresenter
 import javax.inject.Inject
 

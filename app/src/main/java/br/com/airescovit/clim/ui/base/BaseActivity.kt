@@ -21,7 +21,6 @@ import br.com.airescovit.clim.di.component.DaggerActivityComponent
 import br.com.airescovit.clim.di.module.ActivityModule
 import br.com.airescovit.clim.utils.CommomUtils
 import br.com.airescovit.clim.utils.NetworkUtils
-import butterknife.Unbinder
 
 /**
  * Created by Logics on 10/01/2018.
@@ -29,7 +28,6 @@ import butterknife.Unbinder
 abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callback {
 
     var mProgressDialog: ProgressDialog? = null
-    private var mUnBinder: Unbinder? = null
     private lateinit var mActivityComponent: ActivityComponent
 
 
@@ -120,16 +118,6 @@ abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callbac
         //startActivity()
     }
 
-    fun setUnbinder(unbinder: Unbinder) {
-        this.mUnBinder = unbinder
-    }
-
-    override fun onDestroy() {
-        if (mUnBinder != null)
-            mUnBinder!!.unbind()
-
-        super.onDestroy()
-    }
 
     override fun onFragmentAttached() {
 

@@ -7,4 +7,7 @@
     <string name="email">Email</string>
     <string name="password">senha</string>
     <string name="entrar">Entrar</string>
+    <string name="registrar">Criar uma conta</string>
+    <string name="email_incorreto">Email incorreto</string>
+    <string name="campo_obrigatorio">Campo obrigatório</string>
 </resources>

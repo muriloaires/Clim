@@ -8,7 +8,7 @@ import android.os.Bundle
 import br.com.airescovit.clim.R
 import br.com.airescovit.clim.ui.base.BaseActivity
 import br.com.airescovit.clim.ui.login.login.LoginFragment
-import butterknife.ButterKnife
+import br.com.airescovit.clim.ui.login.register.RegisterFragment
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity(), LoginMvpView {
@@ -23,7 +23,6 @@ class LoginActivity : BaseActivity(), LoginMvpView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         getActivityComponent().inject(this)
-        setUnbinder(ButterKnife.bind(this))
         mPresenter.onAttach(this)
     }
 
@@ -35,10 +34,12 @@ class LoginActivity : BaseActivity(), LoginMvpView {
     }
 
     override fun showRegisterFragment() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.root_view, RegisterFragment.newInstance(), RegisterFragment.TAG)
+                .commit()
     }
 
     override fun openMainActivity() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

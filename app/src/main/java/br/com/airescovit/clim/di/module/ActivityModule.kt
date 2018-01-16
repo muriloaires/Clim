@@ -9,6 +9,12 @@ import br.com.airescovit.clim.di.PerActivity
 import br.com.airescovit.clim.ui.login.LoginMvpPresenter
 import br.com.airescovit.clim.ui.login.LoginMvpView
 import br.com.airescovit.clim.ui.login.LoginPresenter
+import br.com.airescovit.clim.ui.login.login.LoginFragmentMvpPresenter
+import br.com.airescovit.clim.ui.login.login.LoginFragmentMvpView
+import br.com.airescovit.clim.ui.login.login.LoginFragmentPresenter
+import br.com.airescovit.clim.ui.login.register.RegisterMvpPresenter
+import br.com.airescovit.clim.ui.login.register.RegisterMvpView
+import br.com.airescovit.clim.ui.login.register.RegisterPresenter
 import br.com.airescovit.clim.ui.splash.SplashMvpPresenter
 import br.com.airescovit.clim.ui.splash.SplashMvpView
 import br.com.airescovit.clim.ui.splash.SplashPresenter
@@ -46,5 +52,13 @@ class ActivityModule(activity: AppCompatActivity) {
         return presenter
     }
 
+    @Provides
+    fun provideLoginFragmentPrese(loginFragmentPresenter: LoginFragmentPresenter<LoginFragmentMvpView>): LoginFragmentMvpPresenter<LoginFragmentMvpView> {
+        return loginFragmentPresenter
+    }
 
+    @Provides
+    fun provideRegisterPresenter(registerPresenter: RegisterPresenter<RegisterMvpView>): RegisterMvpPresenter<RegisterMvpView> {
+        return registerPresenter
+    }
 }

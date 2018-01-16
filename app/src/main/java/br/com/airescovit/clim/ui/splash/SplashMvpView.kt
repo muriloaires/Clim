@@ -8,4 +8,5 @@ import br.com.airescovit.clim.ui.base.MvpView
 interface SplashMvpView : MvpView {
     fun openLoginActivity()
     fun openMainActivity()
+    fun finish()
 }

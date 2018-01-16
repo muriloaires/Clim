@@ -19,10 +19,13 @@ class SplashPresenter<V : SplashMvpView> @Inject constructor(var dataManager: Da
 
     private fun decideNextActivity() {
         if (dataManager.getCurrentLoginMode() == DataManager.LoginMode.LOGGED_IN_MODE_LOGGED_OUT.mType) {
-            (getMvpView() as SplashMvpView).openLoginActivity()
+            getMvpView()!!.openLoginActivity()
         } else {
-            (getMvpView() as SplashMvpView).openMainActivity()
+            getMvpView()!!.openMainActivity()
         }
+
+        getMvpView()!!.finish()
+
     }
 
 }

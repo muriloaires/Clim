@@ -1,12 +1,11 @@
 package br.com.airescovit.clim.ui.base
 
-import br.com.airescovit.clim.data.DataManager
 import javax.inject.Inject
 
 /**
  * Created by Logics on 12/01/2018.
  */
-open class BasePresenter<V : MvpView> : MvpPresenter<V> {
+open class BasePresenter<V : MvpView> @Inject constructor() : MvpPresenter<V> {
 
     private var mMvpView: V? = null
     override fun onAttach(mvpView: V) {

@@ -1,5 +1,6 @@
 package br.com.airescovit.clim.data.network
 
+import br.com.airescovit.clim.data.network.model.LoginRequest
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -8,4 +9,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class AppApiHelper @Inject constructor() : ApiHelper {
+    override fun doLoginRequest(loginRequest: LoginRequest) {
+
+    }
 }

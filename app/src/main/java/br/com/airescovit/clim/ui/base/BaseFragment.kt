@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment
 import android.view.View
 import br.com.airescovit.clim.di.component.ActivityComponent
 import br.com.airescovit.clim.utils.CommomUtils
-import butterknife.Unbinder
 
 /**
  * Created by Logics on 15/01/2018.
@@ -16,7 +15,6 @@ import butterknife.Unbinder
 abstract class BaseFragment : Fragment(), MvpView {
 
     private var mActivity: BaseActivity? = null
-    private var mUnBinder: Unbinder? = null
     private var mProgressDialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,18 +104,9 @@ abstract class BaseFragment : Fragment(), MvpView {
         return mActivity
     }
 
-    fun setUnBinder(unBinder: Unbinder) {
-        mUnBinder = unBinder
-    }
 
     protected abstract fun setUp(view: View)
 
-    override fun onDestroy() {
-        if (mUnBinder != null) {
-            mUnBinder!!.unbind()
-        }
-        super.onDestroy()
-    }
 
     interface Callback {
 
