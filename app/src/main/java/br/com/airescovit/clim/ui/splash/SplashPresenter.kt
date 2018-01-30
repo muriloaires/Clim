@@ -8,7 +8,7 @@ import javax.inject.Inject
 /**
  * Created by Logics on 12/01/2018.
  */
-class SplashPresenter<V : SplashMvpView> @Inject constructor(var dataManager: DataManager) : BasePresenter<V>(), SplashMvpPresenter<V> {
+class SplashPresenter<V : SplashMvpView> @Inject constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), SplashMvpPresenter<V> {
 
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)

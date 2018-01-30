@@ -10,4 +10,5 @@ interface LoginFragmentMvpView : MvpView {
     fun onIncorrectEmail(@StringRes resId: Int)
     fun onIncorrectPassword(@StringRes resId: Int)
     fun showRegisterFragment()
+    fun startMainActivity()
 }

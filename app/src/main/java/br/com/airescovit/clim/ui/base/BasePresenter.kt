@@ -1,11 +1,15 @@
 package br.com.airescovit.clim.ui.base
 
+import br.com.airescovit.clim.R
+import br.com.airescovit.clim.data.DataManager
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import javax.inject.Inject
 
 /**
  * Created by Logics on 12/01/2018.
  */
-open class BasePresenter<V : MvpView> @Inject constructor() : MvpPresenter<V> {
+open class BasePresenter<V : MvpView> @Inject constructor(val dataManager: DataManager) : MvpPresenter<V> {
+
 
     private var mMvpView: V? = null
     override fun onAttach(mvpView: V) {
@@ -16,12 +20,14 @@ open class BasePresenter<V : MvpView> @Inject constructor() : MvpPresenter<V> {
         mMvpView = null
     }
 
-    override fun handleApiError(error: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun handleApiError(error: HttpException) {
+        if(error.code() == 500){
+            getMvpView()?.onError(R.string.something_wrong)
+        }
     }
 
     override fun setUserAsLoggedOut() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        dataManager.setAccessToken(null)
     }
 
     fun isViewAttached(): Boolean {

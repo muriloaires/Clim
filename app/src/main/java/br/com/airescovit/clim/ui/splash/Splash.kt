@@ -2,10 +2,10 @@ package br.com.airescovit.clim.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import br.com.airescovit.clim.R
 import br.com.airescovit.clim.ui.base.BaseActivity
 import br.com.airescovit.clim.ui.login.LoginActivity
+import br.com.airescovit.clim.ui.main.MainActivity
 import javax.inject.Inject
 
 class Splash : BaseActivity(), SplashMvpView {
@@ -26,9 +26,8 @@ class Splash : BaseActivity(), SplashMvpView {
     }
 
     override fun openMainActivity() {
-        Toast.makeText(this, "WOW", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, MainActivity::class.java))
     }
-
 
 
 }

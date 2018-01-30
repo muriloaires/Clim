@@ -3,8 +3,13 @@ package br.com.airescovit.clim.data
 import android.content.Context
 import br.com.airescovit.clim.data.db.DbHelper
 import br.com.airescovit.clim.data.network.ApiHelper
+import br.com.airescovit.clim.data.network.Single
+import br.com.airescovit.clim.data.network.login.model.LoginResponse
+import br.com.airescovit.clim.data.network.model.login.model.LoginRequest
+import br.com.airescovit.clim.data.network.model.login.model.RegisterRequest
 import br.com.airescovit.clim.data.prefs.PreferenceHelper
 import br.com.airescovit.clim.di.ApplicationContext
+import io.reactivex.Observable
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -13,6 +18,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class AppDataManager @Inject constructor(@ApplicationContext context: Context, dbHelper: DbHelper, preferenceHelper: PreferenceHelper, apiHelper: ApiHelper) : DataManager {
+
 
     private var mContext: Context = context
     private var mDbHelper: DbHelper = dbHelper
@@ -70,6 +76,14 @@ class AppDataManager @Inject constructor(@ApplicationContext context: Context, d
 
     override fun setCurrentLoginMode(loginMode: DataManager.LoginMode) {
         mPreferencesHelper.setCurrentLoginMode(loginMode)
+    }
+
+    override fun doLoginRequest(loginRequest: LoginRequest): Observable<LoginResponse> {
+        return mApiHelper.doLoginRequest(loginRequest)
+    }
+
+    override fun doRegisterRequest(registerRequest: Single<RegisterRequest>): Observable<LoginResponse> {
+        return mApiHelper.doRegisterRequest(registerRequest)
     }
 
 }

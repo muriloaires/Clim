@@ -42,4 +42,7 @@ class LoginActivity : BaseActivity(), LoginMvpView {
 
     override fun openMainActivity() {
     }
+
+    fun showMainActivity() {
+    }
 }

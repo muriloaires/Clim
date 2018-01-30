@@ -1,13 +1,41 @@
 <resources>
     <string name="app_name">Clim</string>
-    <string name="algo_errado_ocorreu">Algo errado ocorreu</string>
+    <string name="something_wrong">Algo errado ocorreu</string>
+
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="sign_in">Entrar</string>
+    <string name="register">Criar uma conta</string>
+    <string name="incorrect_email">Email incorreto</string>
+    <string name="compulsory_field">Campo obrigatório</string>
+    <string name="incorrect_password">Senha incorreta</string>
+    <string name="user_not_found">Usuário não encontrado</string>
+    <string name="lastname">Sobrenome</string>
+    <string name="name">Nome</string>
+    <string name="confirm_password">Confirmar senha</string>
+    <string name="do_register">Registrar</string>
+    <string name="min_length_password_error">O tamanho mínimo é de 6 caracteres</string>
+    <string name="different_password">Senhas diferentes</string>
+    <string name="services">Serviços</string>
+    <string name="clients">Clientes</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="email">Email</string>
-    <string name="password">senha</string>
-    <string name="entrar">Entrar</string>
-    <string name="registrar">Criar uma conta</string>
-    <string name="email_incorreto">Email incorreto</string>
-    <string name="campo_obrigatorio">Campo obrigatório</string>
+    <string name="title_activity_add_clients">Map</string>
+    <string name="no_fine_location_permission">Verifique as permissões de localização do app</string>
+    <string name="add_client">Adicionar um cliente</string>
+    <string name="client_name_hint">Nome do cliente</string>
+    <string name="address">Endereço</string>
+    <string name="client_phone_hint">Telefone do cliente</string>
+    <string name="client_zip_code_hint">CEP</string>
+    <string name="client_state_hint">Estado</string>
+    <string name="client_city_hint">Cidade</string>
+    <string name="client_neighborhood_hint">Bairro</string>
+    <string name="client_street_hint">Logradouro (Rua, Avenida)</string>
+    <string name="client_secondary_address_hint">Complemento</string>
+    <string name="mark_location_on_map">Marcar no mapa</string>
+    <string name="cliente_info">Informações do Cliente</string>
+    <string name="no_address_found">Nenhum endereço encontrado</string>
+    <string name="service_not_available">Serviço não disponível</string>
+    <string name="invalid_lat_long_used">Coordenadas inválidas</string>
 </resources>

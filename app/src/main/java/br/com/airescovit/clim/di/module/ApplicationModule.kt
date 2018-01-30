@@ -2,7 +2,6 @@ package br.com.airescovit.clim.di.module
 
 import android.app.Application
 import android.content.Context
-import br.com.airescovit.clim.ClimApp
 import br.com.airescovit.clim.data.AppDataManager
 import br.com.airescovit.clim.data.DataManager
 import br.com.airescovit.clim.data.db.AppDbHelper
@@ -15,8 +14,13 @@ import br.com.airescovit.clim.di.ApplicationContext
 import br.com.airescovit.clim.di.DatabaseInfo
 import br.com.airescovit.clim.di.PreferenceInfo
 import br.com.airescovit.clim.utils.AppConstants
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 /**
@@ -26,7 +30,7 @@ import javax.inject.Singleton
 class ApplicationModule(val application: Application) {
 
     @Provides
-    fun provideApplication(): Application{
+    fun provideApplication(): Application {
         return application
     }
 
@@ -51,6 +55,15 @@ class ApplicationModule(val application: Application) {
 
     @Provides
     @Singleton
+    fun provideRetrofitInstance(): Retrofit {
+        return Retrofit.Builder().baseUrl(AppConstants.BASE_URL + AppConstants.API_VERSION)
+                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+    }
+
+    @Provides
+    @Singleton
     fun provideDataManager(appDataManager: AppDataManager): DataManager {
         return appDataManager
     }
@@ -69,7 +82,8 @@ class ApplicationModule(val application: Application) {
 
     @Provides
     @Singleton
-    internal fun provideApiHelper(appApiHelper: AppApiHelper): ApiHelper {
+    fun provideApiHelper(appApiHelper: AppApiHelper): ApiHelper {
         return appApiHelper
     }
+
 }

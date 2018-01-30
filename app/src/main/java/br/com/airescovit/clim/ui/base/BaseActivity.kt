@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
@@ -44,9 +45,13 @@ abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callbac
         return mActivityComponent
     }
 
+    fun isLowerThanMarshmallow() : Boolean{
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M
+    }
+
     @TargetApi(Build.VERSION_CODES.M)
     fun hasPermission(permission: String): Boolean {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
+        return checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -59,7 +64,7 @@ abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callbac
 
     override fun showLoading() {
         hideLoading()
-        mProgressDialog = CommomUtils.showLoadingDialog(this);
+        mProgressDialog = CommomUtils.showLoadingDialog(this)
     }
 
     override fun hideLoading() {
@@ -71,10 +76,12 @@ abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callbac
     private fun showSnackBar(message: String) {
 
         val snackbar = Snackbar.make(findViewById<View>(android.R.id.content),
-                message, Snackbar.LENGTH_SHORT)
-        val sbView = snackbar.getView()
+                message, Snackbar.LENGTH_LONG)
+        val sbView = snackbar.view
         val textView = sbView.findViewById<TextView>(android.support.design.R.id.snackbar_text)
+        sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
         textView.setTextColor(ContextCompat.getColor(this, R.color.white))
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18F)
         snackbar.show()
     }
 
@@ -82,19 +89,19 @@ abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callbac
         if (error != null) {
             showSnackBar(error)
         } else {
-            showSnackBar(getString(R.string.algo_errado_ocorreu))
+            showSnackBar(getString(R.string.something_wrong))
         }
     }
 
-    override fun onError(restId: Int) {
-        onError(getString(restId))
+    override fun onError(resId: Int) {
+        onError(getString(resId))
     }
 
     override fun showMessage(message: String?) {
         if (message != null) {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this, getString(R.string.algo_errado_ocorreu), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show()
         }
     }
 
