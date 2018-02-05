@@ -38,7 +38,6 @@ abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callbac
                 .activityModule(ActivityModule(this))
                 .applicationComponent((application as ClimApp).mApplicationComponent)
                 .build()
-        Log.d("", "")
     }
 
     fun getActivityComponent(): ActivityComponent {

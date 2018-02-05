@@ -5,25 +5,17 @@
     android:orientation="vertical">
 
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarAddClients"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarAddClients"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:title="@string/app_name"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:navigationIcon="@drawable/ic_arrow_back"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/add_client" />
-
-
-    </android.support.design.widget.AppBarLayout>
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:title="@string/app_name"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:title="@string/add_client"
+        app:titleTextColor="@color/white" />
 
 
     <ScrollView
@@ -34,7 +26,8 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,10 +45,12 @@
                 android:orientation="vertical">
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputLayoutClientName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/inputClientName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/client_name_hint"
@@ -64,10 +59,12 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputLayoutClientPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/inputClientPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/client_phone_hint"
@@ -78,21 +75,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_marginTop="8dp"
                     android:text="@string/address"
                     android:textSize="20sp" />
 
-                <Button
+                <TextView
                     android:id="@+id/btnMarcarNoMapa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/button_primary_bg"
                     android:drawableTop="@drawable/ic_map_pointer"
                     android:padding="8dp"
-                    android:text="@string/mark_location_on_map" />
+                    android:text="@string/mark_location_on_map"
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -115,7 +111,24 @@
                     </android.support.design.widget.TextInputLayout>
 
 
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/spinnerCountries"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="2dp"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
                     <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textInputLayoutClientState"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
@@ -128,6 +141,22 @@
                             android:inputType="textCapWords"
                             android:maxLines="1" />
                     </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textInputLayoutClientCity"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/inputCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/client_city_hint"
+                            android:inputType="textCapWords"
+                            android:maxLines="1" />
+                    </android.support.design.widget.TextInputLayout>
+
 
                 </LinearLayout>
 
@@ -143,21 +172,6 @@
                         android:layout_weight="1">
 
                         <android.support.design.widget.TextInputEditText
-                            android:id="@+id/inputCity"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/client_city_hint"
-                            android:inputType="textCapWords"
-                            android:maxLines="1" />
-                    </android.support.design.widget.TextInputLayout>
-
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <android.support.design.widget.TextInputEditText
                             android:id="@+id/inputNeighborhood"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -166,33 +180,58 @@
                             android:maxLines="1" />
                     </android.support.design.widget.TextInputLayout>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textInputLayoutClientStreet"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/inputStreet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/client_street_hint"
+                            android:inputType="textCapWords"
+                            android:maxLines="1" />
+                    </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/inputStreet"
-                        android:layout_width="match_parent"
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:hint="@string/client_street_hint"
-                        android:inputType="textCapWords"
-                        android:maxLines="1" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_weight="1">
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/inputNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/client_number_address_hint"
+                            android:inputType="textCapWords"
+                            android:maxLines="1" />
+                    </android.support.design.widget.TextInputLayout>
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/inputComplemento"
-                        android:layout_width="match_parent"
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:hint="@string/client_secondary_address_hint"
-                        android:inputType="textCapWords"
-                        android:maxLines="1" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/inputComplemento"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/client_secondary_address_hint"
+                            android:inputType="textCapWords"
+                            android:maxLines="1" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
 
             </LinearLayout>
 

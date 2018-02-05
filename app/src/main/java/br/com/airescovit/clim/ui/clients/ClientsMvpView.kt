@@ -1,5 +1,6 @@
 package br.com.airescovit.clim.ui.clients
 
+import br.com.airescovit.clim.data.db.model.Client
 import br.com.airescovit.clim.ui.base.MvpView
 
 /**
@@ -7,4 +8,5 @@ import br.com.airescovit.clim.ui.base.MvpView
  */
 interface ClientsMvpView : MvpView {
     fun openAddClientsActivity()
+    fun updateClientsList(clients: List<Client>)
 }

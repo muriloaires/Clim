@@ -41,9 +41,9 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ui.add_clients.AddClientsActivity"
+            android:name=".ui.addclients.AddClientsActivity"
             android:label="@string/title_activity_add_clients" />
-        <activity android:name=".ui.add_clients.MapActivity" />
+        <activity android:name=".ui.addclients.MapActivity" />
 
         <service
             android:name=".services.AddressIntentService"

@@ -54,7 +54,7 @@ class AppPreferenceHelper @Inject constructor(@ApplicationContext context: Conte
     }
 
     override fun getCurrentAccessToken(): String {
-        return mPref.getString(PREF_KEY_ACCESS_TOKEN, null)
+        return "Bearer " + mPref.getString(PREF_KEY_ACCESS_TOKEN, null)
     }
 
     override fun setCurrentLoginMode(loginMode: DataManager.LoginMode) {

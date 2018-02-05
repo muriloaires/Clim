@@ -31,11 +31,13 @@
     <string name="client_state_hint">Estado</string>
     <string name="client_city_hint">Cidade</string>
     <string name="client_neighborhood_hint">Bairro</string>
-    <string name="client_street_hint">Logradouro (Rua, Avenida)</string>
+    <string name="client_street_hint">(Rua, Avenida)</string>
     <string name="client_secondary_address_hint">Complemento</string>
     <string name="mark_location_on_map">Marcar no mapa</string>
     <string name="cliente_info">Informações do Cliente</string>
     <string name="no_address_found">Nenhum endereço encontrado</string>
     <string name="service_not_available">Serviço não disponível</string>
     <string name="invalid_lat_long_used">Coordenadas inválidas</string>
+    <string name="client_number_address_hint">Número</string>
+    <string name="choose_a_country">Escolha um país</string>
 </resources>

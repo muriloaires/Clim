@@ -6,9 +6,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import br.com.airescovit.clim.di.ActivityContext
 import br.com.airescovit.clim.di.PerActivity
-import br.com.airescovit.clim.ui.add_clients.AddClientsMvpPresenter
-import br.com.airescovit.clim.ui.add_clients.AddClientsMvpView
-import br.com.airescovit.clim.ui.add_clients.AddClientsPresenter
+import br.com.airescovit.clim.ui.addclients.AddClientsMvpPresenter
+import br.com.airescovit.clim.ui.addclients.AddClientsMvpView
+import br.com.airescovit.clim.ui.addclients.AddClientsPresenter
 import br.com.airescovit.clim.ui.clients.ClientsMvpPresenter
 import br.com.airescovit.clim.ui.clients.ClientsMvpView
 import br.com.airescovit.clim.ui.clients.ClientsPresenter

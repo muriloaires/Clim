@@ -38,8 +38,7 @@ class LoginFragmentPresenter<V : LoginFragmentMvpView> @Inject constructor(dataM
                                     loginResponse.user.email)
                             getMvpView()?.hideLoading()
                             getMvpView()?.startMainActivity()
-                        }
-                                , { err ->
+                        }, { err ->
                             getMvpView()?.hideLoading()
                             handleApiError(err as HttpException)
                         })

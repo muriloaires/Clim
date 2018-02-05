@@ -2,7 +2,7 @@ package br.com.airescovit.clim.di.component
 
 import br.com.airescovit.clim.di.PerActivity
 import br.com.airescovit.clim.di.module.ActivityModule
-import br.com.airescovit.clim.ui.add_clients.AddClientsActivity
+import br.com.airescovit.clim.ui.addclients.AddClientsActivity
 import br.com.airescovit.clim.ui.clients.ClientsFragment
 import br.com.airescovit.clim.ui.login.LoginActivity
 import br.com.airescovit.clim.ui.login.login.LoginFragment

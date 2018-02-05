@@ -1,4 +1,4 @@
-package br.com.airescovit.clim.ui.add_clients
+package br.com.airescovit.clim.ui.addclients
 
 import android.Manifest
 import android.annotation.SuppressLint

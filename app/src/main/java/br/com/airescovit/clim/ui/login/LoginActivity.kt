@@ -9,6 +9,7 @@ import br.com.airescovit.clim.R
 import br.com.airescovit.clim.ui.base.BaseActivity
 import br.com.airescovit.clim.ui.login.login.LoginFragment
 import br.com.airescovit.clim.ui.login.register.RegisterFragment
+import br.com.airescovit.clim.ui.main.MainActivity
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity(), LoginMvpView {
@@ -44,5 +45,6 @@ class LoginActivity : BaseActivity(), LoginMvpView {
     }
 
     fun showMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

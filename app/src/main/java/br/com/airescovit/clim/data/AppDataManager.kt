@@ -2,9 +2,11 @@ package br.com.airescovit.clim.data
 
 import android.content.Context
 import br.com.airescovit.clim.data.db.DbHelper
+import br.com.airescovit.clim.data.db.model.Client
 import br.com.airescovit.clim.data.network.ApiHelper
 import br.com.airescovit.clim.data.network.Single
 import br.com.airescovit.clim.data.network.login.model.LoginResponse
+import br.com.airescovit.clim.data.network.model.RegisterClientRequest
 import br.com.airescovit.clim.data.network.model.login.model.LoginRequest
 import br.com.airescovit.clim.data.network.model.login.model.RegisterRequest
 import br.com.airescovit.clim.data.prefs.PreferenceHelper
@@ -18,7 +20,6 @@ import javax.inject.Singleton
  */
 @Singleton
 class AppDataManager @Inject constructor(@ApplicationContext context: Context, dbHelper: DbHelper, preferenceHelper: PreferenceHelper, apiHelper: ApiHelper) : DataManager {
-
 
     private var mContext: Context = context
     private var mDbHelper: DbHelper = dbHelper
@@ -84,6 +85,18 @@ class AppDataManager @Inject constructor(@ApplicationContext context: Context, d
 
     override fun doRegisterRequest(registerRequest: Single<RegisterRequest>): Observable<LoginResponse> {
         return mApiHelper.doRegisterRequest(registerRequest)
+    }
+
+    override fun doRegisterClientRequest(header: String, userId: Long, registerClientRequest: RegisterClientRequest): Observable<Client> {
+        return mApiHelper.doRegisterClientRequest(header, userId, registerClientRequest)
+    }
+
+    override fun insertClient(client: Client): Observable<Long> {
+        return mDbHelper.insertClient(client)
+    }
+
+    override fun loadAllClients(): Observable<List<Client>> {
+        return mDbHelper.loadAllClients()
     }
 
 }
