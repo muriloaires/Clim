@@ -120,7 +120,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback, GoogleApiClient.Connecti
     @SuppressLint("MissingPermission")
     override fun onConnected(p0: Bundle?) {
         mLocationRequest = LocationRequest()
-        mLocationRequest.smallestDisplacement = 10f
+        mLocationRequest.smallestDisplacement = 20f
         mLocationRequest.interval = 1000
         mLocationRequest.fastestInterval = 1000
         mLocationRequest.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY

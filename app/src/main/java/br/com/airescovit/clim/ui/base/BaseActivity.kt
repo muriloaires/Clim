@@ -3,6 +3,7 @@ package br.com.airescovit.clim.ui.base
 import android.annotation.TargetApi
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -20,6 +21,7 @@ import br.com.airescovit.clim.R
 import br.com.airescovit.clim.di.component.ActivityComponent
 import br.com.airescovit.clim.di.component.DaggerActivityComponent
 import br.com.airescovit.clim.di.module.ActivityModule
+import br.com.airescovit.clim.ui.login.LoginActivity
 import br.com.airescovit.clim.utils.CommomUtils
 import br.com.airescovit.clim.utils.NetworkUtils
 
@@ -44,7 +46,7 @@ abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callbac
         return mActivityComponent
     }
 
-    fun isLowerThanMarshmallow() : Boolean{
+    fun isLowerThanMarshmallow(): Boolean {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.M
     }
 
@@ -121,7 +123,8 @@ abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callbac
     }
 
     override fun openActivityOnTokenExpire() {
-        //startActivity()
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 
 

@@ -3,10 +3,12 @@ package br.com.airescovit.clim.data
 import android.content.Context
 import br.com.airescovit.clim.data.db.DbHelper
 import br.com.airescovit.clim.data.db.model.Client
+import br.com.airescovit.clim.data.db.model.Task
 import br.com.airescovit.clim.data.network.ApiHelper
 import br.com.airescovit.clim.data.network.Single
 import br.com.airescovit.clim.data.network.login.model.LoginResponse
 import br.com.airescovit.clim.data.network.model.RegisterClientRequest
+import br.com.airescovit.clim.data.network.model.RegisterTaskRequest
 import br.com.airescovit.clim.data.network.model.login.model.LoginRequest
 import br.com.airescovit.clim.data.network.model.login.model.RegisterRequest
 import br.com.airescovit.clim.data.prefs.PreferenceHelper
@@ -91,12 +93,39 @@ class AppDataManager @Inject constructor(@ApplicationContext context: Context, d
         return mApiHelper.doRegisterClientRequest(header, userId, registerClientRequest)
     }
 
+    override fun getClientsAPI(header: String, userId: Long, page: Int): Observable<List<Client>> {
+        return mApiHelper.getClientsAPI(header, userId, page)
+    }
+
     override fun insertClient(client: Client): Observable<Long> {
         return mDbHelper.insertClient(client)
+    }
+
+    override fun insertClientList(clients: List<Client>): Observable<Unit> {
+        return mDbHelper.insertClientList(clients)
     }
 
     override fun loadAllClients(): Observable<List<Client>> {
         return mDbHelper.loadAllClients()
     }
 
+    override fun doRegisterTask(header: String, userId: Long, registerTaskRequest: RegisterTaskRequest): Observable<Task> {
+        return mApiHelper.doRegisterTask(header, userId, registerTaskRequest)
+    }
+
+    override fun insertTask(task: Task): Observable<Long> {
+        return mDbHelper.insertTask(task)
+    }
+
+    override fun insertTaskList(tasks: List<Task>): Observable<Unit> {
+        return mDbHelper.insertTaskList(tasks)
+    }
+
+    override fun loadAllTasks(): Observable<List<Task>> {
+        return mDbHelper.loadAllTasks()
+    }
+
+    override fun getTasksAPI(header: String, userId: Long, page: Int): Observable<List<Task>> {
+        return mApiHelper.getTasksAPI(header, userId, page)
+    }
 }

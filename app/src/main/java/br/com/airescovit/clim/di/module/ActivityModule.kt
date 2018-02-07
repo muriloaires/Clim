@@ -31,6 +31,7 @@ import br.com.airescovit.clim.ui.splash.SplashPresenter
 import br.com.airescovit.clim.ui.tasks.TaskMvpPresenter
 import br.com.airescovit.clim.ui.tasks.TaskPresenter
 import br.com.airescovit.clim.ui.tasks.TasksMvpView
+import br.com.airescovit.clim.ui.utils.EndlessScrollListener
 import dagger.Module
 import dagger.Provides
 
@@ -102,10 +103,11 @@ class ActivityModule(activity: AppCompatActivity) {
         return taskPresenter
     }
 
-    @Provides
-    fun provideLinearLayoutManager(context: Context): RecyclerView.LayoutManager {
-        return LinearLayoutManager(context)
-    }
+//    @Provides
+//    fun provideLinearLayoutManager(context: Context): LinearLayoutManager {
+//        return LinearLayoutManager(context)
+//    }
+
 
 
 }

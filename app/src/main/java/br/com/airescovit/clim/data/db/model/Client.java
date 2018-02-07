@@ -25,11 +25,15 @@ public class Client {
     @ToOne(joinProperty = "addressId")
     private Address address;
 
-    /** Used to resolve relations */
+    /**
+     * Used to resolve relations
+     */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
 
-    /** Used for active entity operations. */
+    /**
+     * Used for active entity operations.
+     */
     @Generated(hash = 883866064)
     private transient ClientDao myDao;
 
@@ -64,7 +68,9 @@ public class Client {
     @Generated(hash = 1156467801)
     private transient Long address__resolvedKey;
 
-    /** To-one relationship, resolved on first access. */
+    /**
+     * To-one relationship, resolved on first access.
+     */
     @Generated(hash = 489389972)
     public Address getAddress() {
         Long __key = this.addressId;
@@ -83,7 +89,9 @@ public class Client {
         return address;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     @Generated(hash = 607080948)
     public void setAddress(Address address) {
         synchronized (this) {
@@ -129,6 +137,7 @@ public class Client {
         myDao.update(this);
     }
 
+
     public String getName() {
         return this.name;
     }
@@ -143,6 +152,10 @@ public class Client {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public void attachEntities() {
+        setAddress(address);
     }
 
     /** called by internal mechanisms, do not call yourself. */

@@ -12,6 +12,7 @@ import android.widget.EditText
 
 import br.com.airescovit.clim.R
 import br.com.airescovit.clim.ui.base.BaseFragment
+import br.com.airescovit.clim.ui.login.LoginActivity
 import javax.inject.Inject
 
 
@@ -82,7 +83,7 @@ class RegisterFragment : BaseFragment(), RegisterMvpView {
     }
 
     override fun startMainActivity() {
-
+        (getBaseActivity() as LoginActivity).showMainActivity()
     }
 
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context="br.com.airescovit.clim.ui.main.MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -52,14 +53,14 @@
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:icon="@drawable/ic_tools"
+            android:icon="@drawable/ic_screwdriver"
             android:text="@string/services" />
 
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_user"
+            android:icon="@drawable/ic_man"
             android:text="@string/clients" />
 
     </android.support.design.widget.TabLayout>

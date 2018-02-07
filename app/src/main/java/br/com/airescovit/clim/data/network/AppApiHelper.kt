@@ -1,10 +1,13 @@
 package br.com.airescovit.clim.data.network
 
 import br.com.airescovit.clim.data.db.model.Client
-import br.com.airescovit.clim.data.network.login.endpoint.ClientEndpoint
-import br.com.airescovit.clim.data.network.login.endpoint.UserEndpoint
+import br.com.airescovit.clim.data.db.model.Task
+import br.com.airescovit.clim.data.network.endpoint.ClientEndpoint
+import br.com.airescovit.clim.data.network.endpoint.TaskEndpoint
+import br.com.airescovit.clim.data.network.endpoint.UserEndpoint
 import br.com.airescovit.clim.data.network.login.model.LoginResponse
 import br.com.airescovit.clim.data.network.model.RegisterClientRequest
+import br.com.airescovit.clim.data.network.model.RegisterTaskRequest
 import br.com.airescovit.clim.data.network.model.login.model.LoginRequest
 import br.com.airescovit.clim.data.network.model.login.model.RegisterRequest
 import io.reactivex.Observable
@@ -28,6 +31,18 @@ class AppApiHelper @Inject constructor(private val retrofit: Retrofit) : ApiHelp
     }
 
     override fun doRegisterClientRequest(header: String, userId: Long, registerClientRequest: RegisterClientRequest): Observable<Client> {
-        return retrofit.create(ClientEndpoint::class.java).doClientRegister(header,userId, registerClientRequest)
+        return retrofit.create(ClientEndpoint::class.java).doClientRegister(header, userId, registerClientRequest)
+    }
+
+    override fun getClientsAPI(header: String, userId: Long, page: Int): Observable<List<Client>> {
+        return retrofit.create(ClientEndpoint::class.java).getClients(header, userId, page)
+    }
+
+    override fun doRegisterTask(header: String, userId: Long, registerTaskRequest: RegisterTaskRequest): Observable<Task> {
+        return retrofit.create(TaskEndpoint::class.java).doTaskRegister(header, userId, registerTaskRequest)
+    }
+
+    override fun getTasksAPI(header: String, userId: Long, page: Int): Observable<List<Task>> {
+        return retrofit.create(TaskEndpoint::class.java).getTasks(header, userId, page)
     }
 }

@@ -41,6 +41,6 @@ class MainActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
         view_pager.currentItem = tab?.position!!
-        tab.icon?.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY)
+        tab.icon?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.MULTIPLY)
     }
 }

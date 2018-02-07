@@ -40,4 +40,8 @@
     <string name="invalid_lat_long_used">Coordenadas inválidas</string>
     <string name="client_number_address_hint">Número</string>
     <string name="choose_a_country">Escolha um país</string>
+    <string name="none_client_text">Você não possui nenhum cliente.\nToque aqui para adicionar</string>
+    <string name="tap_to">Toque para</string>
+    <string name="search">Pesquisar</string>
+    <string name="add_task">Adicionar um serviço</string>
 </resources>

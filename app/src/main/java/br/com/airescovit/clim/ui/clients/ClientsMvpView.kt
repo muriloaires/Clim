@@ -8,5 +8,10 @@ import br.com.airescovit.clim.ui.base.MvpView
  */
 interface ClientsMvpView : MvpView {
     fun openAddClientsActivity()
-    fun updateClientsList(clients: List<Client>)
+    fun updateClientsList()
+    fun resetScrollListener()
+    fun removeScrollListener()
+    fun setOnScrollListener()
+    fun showNoClientsView()
+    fun hideNoClientView()
 }

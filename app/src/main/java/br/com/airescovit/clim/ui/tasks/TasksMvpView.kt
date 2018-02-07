@@ -5,4 +5,13 @@ import br.com.airescovit.clim.ui.base.MvpView
 /**
  * Created by murilo aires on 28/01/2018.
  */
-interface TasksMvpView : MvpView
+interface TasksMvpView : MvpView {
+
+    fun openAddTasksActivity()
+    fun updateTasksList()
+    fun resetScrollListener()
+    fun removeScrollListener()
+    fun setOnScrollListener()
+    fun showNoTasksView()
+    fun hideNoTaskView()
+}

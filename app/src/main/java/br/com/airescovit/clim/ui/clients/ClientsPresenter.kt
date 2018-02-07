@@ -1,8 +1,11 @@
 package br.com.airescovit.clim.ui.clients
 
 import br.com.airescovit.clim.data.DataManager
+import br.com.airescovit.clim.data.db.model.Client
 import br.com.airescovit.clim.ui.base.BasePresenter
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -10,19 +13,86 @@ import javax.inject.Inject
  * Created by murilo aires on 27/01/2018.
  */
 class ClientsPresenter<V : ClientsMvpView> @Inject constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), ClientsMvpPresenter<V> {
-    override fun onAddClientsActivityReturn() {
-        loadAllClients()
+
+    private var clients: MutableList<Client?> = mutableListOf()
+    private var page = 1
+
+    init {
+        clients.add(0, null)
     }
 
-    private fun loadAllClients() {
-        dataManager.loadAllClients().subscribeOn(Schedulers.io())
+    override fun onAddClientsActivityReturn() {
+        loadAllClientsFromDb()
+    }
+
+    private fun loadAllClientsFromDb() {
+        dataManager.loadAllClients()
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ clients ->
-                    getMvpView()?.updateClientsList(clients)
+                .subscribe({ it: List<Client> ->
+                    if (!it.isEmpty()) {
+                        getMvpView()?.hideNoClientView()
+                    }
+                    this.clients.addAll(this.clients.size - 1, it)
+                    getMvpView()?.updateClientsList()
+                    loadFromAPI(page)
                 })
     }
 
     override fun onFabClick() {
         getMvpView()?.openAddClientsActivity()
+    }
+
+    override fun getClients(): List<Client?> {
+        return clients
+    }
+
+    override fun onViewReady() {
+        loadAllClientsFromDb()
+    }
+
+    private fun loadFromAPI(page: Int) {
+        getMvpView()?.resetScrollListener()
+        dataManager.getClientsAPI(dataManager.getCurrentAccessToken(), dataManager.getCurrentUserId(), page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ clients ->
+                    for (client: Client in clients) {
+                        client.attachEntities()
+                    }
+                    dataManager.insertClientList(clients)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe()
+
+                    if (this.page == 1) {
+                        getMvpView()?.setOnScrollListener()
+                        this.clients.clear()
+                        this.clients.add(null)
+
+
+                        if (clients.isEmpty()) {
+                            getMvpView()?.showNoClientsView()
+                        }
+                    }
+
+                    if (clients.size < 20) {
+                        this.clients.remove(null)
+                        this.clients.addAll(this.clients.size, clients)
+                        getMvpView()?.removeScrollListener()
+                    } else {
+                        this.clients.addAll(this.clients.size - 1, clients)
+                        this.page++
+                    }
+
+                    getMvpView()?.updateClientsList()
+                }, { err ->
+                    handleApiError(err as HttpException)
+                })
+    }
+
+    override fun onRecylerLoadmore() {
+        page++
+        loadFromAPI(page)
     }
 }

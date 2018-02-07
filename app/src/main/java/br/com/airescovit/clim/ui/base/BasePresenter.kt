@@ -21,7 +21,13 @@ open class BasePresenter<V : MvpView> @Inject constructor(val dataManager: DataM
     }
 
     override fun handleApiError(error: HttpException) {
-        if(error.code() == 500){
+        when (error.code()) {
+            401 -> {
+                setUserAsLoggedOut()
+                getMvpView()?.openActivityOnTokenExpire()
+            }
+        }
+        if (error.code() == 500) {
             getMvpView()?.onError(R.string.something_wrong)
         }
     }

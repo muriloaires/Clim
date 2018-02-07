@@ -1,4 +1,4 @@
-package br.com.airescovit.clim.data.network.login.endpoint
+package br.com.airescovit.clim.data.network.endpoint
 
 import br.com.airescovit.clim.data.network.Single
 import br.com.airescovit.clim.data.network.login.model.LoginResponse
