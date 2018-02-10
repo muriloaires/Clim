@@ -9,7 +9,6 @@ import br.com.airescovit.clim.ui.base.MvpPresenter
 interface ClientsMvpPresenter<V : ClientsMvpView> : MvpPresenter<V> {
     fun onFabClick()
     fun onAddClientsActivityReturn()
-    fun getClients(): List<Client?>
     fun onViewReady()
     fun onRecylerLoadmore()
 }

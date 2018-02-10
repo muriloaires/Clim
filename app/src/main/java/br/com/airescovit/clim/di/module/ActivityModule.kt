@@ -9,6 +9,9 @@ import br.com.airescovit.clim.di.PerActivity
 import br.com.airescovit.clim.ui.addclients.AddClientsMvpPresenter
 import br.com.airescovit.clim.ui.addclients.AddClientsMvpView
 import br.com.airescovit.clim.ui.addclients.AddClientsPresenter
+import br.com.airescovit.clim.ui.addtask.AddTaskMvpPresenter
+import br.com.airescovit.clim.ui.addtask.AddTaskMvpView
+import br.com.airescovit.clim.ui.addtask.AddTaskPresenter
 import br.com.airescovit.clim.ui.clients.ClientsMvpPresenter
 import br.com.airescovit.clim.ui.clients.ClientsMvpView
 import br.com.airescovit.clim.ui.clients.ClientsPresenter
@@ -103,11 +106,11 @@ class ActivityModule(activity: AppCompatActivity) {
         return taskPresenter
     }
 
-//    @Provides
-//    fun provideLinearLayoutManager(context: Context): LinearLayoutManager {
-//        return LinearLayoutManager(context)
-//    }
-
+    @PerActivity
+    @Provides
+    fun provideAddTaskPresenter(addTaskPresenter: AddTaskPresenter<AddTaskMvpView>): AddTaskMvpPresenter<AddTaskMvpView> {
+        return addTaskPresenter
+    }
 
 
 }

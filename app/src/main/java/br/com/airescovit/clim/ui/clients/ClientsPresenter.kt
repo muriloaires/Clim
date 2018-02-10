@@ -12,13 +12,15 @@ import javax.inject.Inject
 /**
  * Created by murilo aires on 27/01/2018.
  */
-class ClientsPresenter<V : ClientsMvpView> @Inject constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), ClientsMvpPresenter<V> {
+class ClientsPresenter<V : ClientsMvpView> @Inject constructor(dataManager: DataManager) : BasePresenter<V>(dataManager),
+        ClientsMvpPresenter<V>, ClientsListAction {
 
-    private var clients: MutableList<Client?> = mutableListOf()
+    private var clients: MutableList<Any?> = mutableListOf()
     private var page = 1
 
     init {
-        clients.add(0, null)
+        clients.add(0, Any())
+        clients.add(clients.size, null)
     }
 
     override fun onAddClientsActivityReturn() {
@@ -41,10 +43,6 @@ class ClientsPresenter<V : ClientsMvpView> @Inject constructor(dataManager: Data
 
     override fun onFabClick() {
         getMvpView()?.openAddClientsActivity()
-    }
-
-    override fun getClients(): List<Client?> {
-        return clients
     }
 
     override fun onViewReady() {
@@ -94,5 +92,19 @@ class ClientsPresenter<V : ClientsMvpView> @Inject constructor(dataManager: Data
     override fun onRecylerLoadmore() {
         page++
         loadFromAPI(page)
+    }
+
+    override fun getList(): List<Any?> {
+        return this.clients
+    }
+
+    override fun onAddClientClick() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun isSelection(): Boolean = true
+
+    override fun onAddTaskClick(position: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

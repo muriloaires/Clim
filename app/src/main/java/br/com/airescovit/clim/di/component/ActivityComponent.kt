@@ -3,6 +3,7 @@ package br.com.airescovit.clim.di.component
 import br.com.airescovit.clim.di.PerActivity
 import br.com.airescovit.clim.di.module.ActivityModule
 import br.com.airescovit.clim.ui.addclients.AddClientsActivity
+import br.com.airescovit.clim.ui.addtask.AddTaskActivity
 import br.com.airescovit.clim.ui.clients.ClientsFragment
 import br.com.airescovit.clim.ui.login.LoginActivity
 import br.com.airescovit.clim.ui.login.login.LoginFragment
@@ -24,6 +25,8 @@ interface ActivityComponent : ApplicationComponent {
     fun inject(loginActivity: LoginActivity)
 
     fun inject(addClientsActivity: AddClientsActivity)
+
+    fun inject(addTaskActivity: AddTaskActivity)
 
     fun inject(registerFragment: RegisterFragment)
 

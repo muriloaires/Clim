@@ -11,26 +11,34 @@ import br.com.airescovit.clim.ui.base.LoadViewHolder
 /**
  * Created by Murilo Aires on 05/02/2018.
  */
-class ClientsAdapter(val mPresenter: ClientsMvpPresenter<ClientsMvpView>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ClientsAdapter(val mClientsListAction: ClientsListAction) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val CLIENT: Int = 0
     private val LOADING: Int = 1
     private val ADD: Int = 2
 
-    override fun getItemCount(): Int = mPresenter.getClients().size + 1
+    override fun getItemCount(): Int = mClientsListAction.getList().size
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        if (position == 0) {
-            (holder as AddClientViewHolder).rootView.setOnClickListener {
-                mPresenter.onFabClick()
+        if (holder is AddClientViewHolder) {
+            holder.rootView.setOnClickListener {
+                mClientsListAction.onAddClientClick()
             }
-        } else if (position != 0 && mPresenter.getClients()[position - 1] != null) {
-            val client = mPresenter.getClients()[position - 1]
-            (holder as ClientViewHolder).textClientName.text = client?.name
+        } else if (holder is ClientViewHolder) {
+            val client = mClientsListAction.getList()[position] as Client
+            holder.textClientName.text = client?.name
             holder.textStateCity.text = client?.address?.state + " - " + client?.address?.city
             holder.textStreetNeighborhood.text = client?.address?.street + " - " + client?.address?.neighborhood
             holder.textPostalCode.text = client?.address?.postalCode
+            holder.imgAgendarVisita.setOnClickListener {
+                mClientsListAction.onAddTaskClick(position)
+            }
+            if (mClientsListAction.isSelection()) {
+                holder.imgAgendarVisita.visibility = View.GONE
+            } else {
+                holder.imgAgendarVisita.visibility = View.VISIBLE
+            }
         }
 
     }
@@ -54,9 +62,9 @@ class ClientsAdapter(val mPresenter: ClientsMvpPresenter<ClientsMvpView>) : Recy
 
     override fun getItemViewType(position: Int): Int {
         return when {
-            position == 0 -> ADD
-            mPresenter.getClients()[position - 1] == null -> LOADING
-            else -> CLIENT
+            mClientsListAction.getList()[position] is Any -> ADD
+            mClientsListAction.getList()[position] is Client -> CLIENT
+            else -> LOADING
         }
     }
 }

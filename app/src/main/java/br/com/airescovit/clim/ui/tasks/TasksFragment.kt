@@ -11,9 +11,11 @@ import android.view.*
 
 import br.com.airescovit.clim.R
 import br.com.airescovit.clim.ui.addclients.AddClientsActivity
+import br.com.airescovit.clim.ui.addtask.AddTaskActivity
 import br.com.airescovit.clim.ui.base.BaseFragment
 import br.com.airescovit.clim.ui.clients.ClientsAdapter
 import br.com.airescovit.clim.ui.clients.ClientsFragment
+import br.com.airescovit.clim.ui.clients.ClientsFragment.Companion.REQUEST_ADD_CLIENT
 import br.com.airescovit.clim.ui.clients.ClientsMvpPresenter
 import br.com.airescovit.clim.ui.clients.ClientsMvpView
 import br.com.airescovit.clim.ui.utils.EndlessScrollListener
@@ -31,6 +33,8 @@ class TasksFragment : BaseFragment(), TasksMvpView {
         fun getInstance(): TasksFragment {
             return TasksFragment()
         }
+
+        const val REQUEST_ADD_TASK: Int = 1
     }
 
 
@@ -67,13 +71,13 @@ class TasksFragment : BaseFragment(), TasksMvpView {
 
 
     override fun openAddTasksActivity() {
-        startActivityForResult(Intent(activity, AddClientsActivity::class.java), ClientsFragment.REQUEST_ADD_CLIENT)
+        startActivityForResult(Intent(activity, AddTaskActivity::class.java), REQUEST_ADD_TASK)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
-            ClientsFragment.REQUEST_ADD_CLIENT -> {
+            REQUEST_ADD_TASK -> {
                 if (resultCode == Activity.RESULT_OK) {
                     mPresenter.onAddTaskActivityReturn()
                 }

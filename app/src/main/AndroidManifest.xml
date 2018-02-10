@@ -47,7 +47,9 @@
 
         <service
             android:name=".services.AddressIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <activity android:name=".ui.addtask.AddTaskActivity"></activity>
     </application>
 
 </manifest>

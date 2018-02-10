@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,7 +7,6 @@
     tools:context="br.com.airescovit.clim.ui.clients.ClientsFragment">
 
     <LinearLayout
-        android:visibility="gone"
         android:id="@+id/noClientsLayout"
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -15,7 +15,8 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/background_bordered_light_gray"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="60dp"
@@ -33,10 +34,10 @@
 
     </LinearLayout>
 
-    <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerClients"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </RelativeLayout>

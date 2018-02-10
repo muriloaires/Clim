@@ -1,9 +1,12 @@
 package br.com.airescovit.clim.ui.main
 
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
+import android.widget.ImageView
+import android.widget.TextView
 import br.com.airescovit.clim.R
 import br.com.airescovit.clim.ui.base.BaseActivity
 import br.com.airescovit.clim.ui.main.adapter.PagerAdapter
@@ -26,7 +29,8 @@ class MainActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
         tab_layout.addOnTabSelectedListener(this)
         view_pager.adapter = mPagerAdapter
         view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
-
+        tab_layout.getTabAt(0)?.setCustomView(R.layout.tasks_tab)
+        tab_layout.getTabAt(1)?.setCustomView(R.layout.clients_tab)
     }
 
 
@@ -36,11 +40,11 @@ class MainActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {
         view_pager.currentItem = tab?.position!!
-        tab.icon?.setColorFilter(ContextCompat.getColor(this, android.R.color.darker_gray), PorterDuff.Mode.MULTIPLY)
+        tab.customView?.findViewById<TextView>(R.id.tabText)?.setTextColor(ContextCompat.getColor(this, R.color.colorAccentLighter))
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
         view_pager.currentItem = tab?.position!!
-        tab.icon?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.MULTIPLY)
+        tab.customView?.findViewById<TextView>(R.id.tabText)?.setTextColor(Color.WHITE)
     }
 }

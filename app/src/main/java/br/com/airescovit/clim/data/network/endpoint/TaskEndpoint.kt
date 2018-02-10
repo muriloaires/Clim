@@ -12,12 +12,12 @@ import retrofit2.http.*
 interface TaskEndpoint {
 
     companion object {
-        const val TASK_ENDPOINT: String = "users/{userId}/clients"
+        const val TASK_ENDPOINT: String = "users/{userId}/tasks"
     }
 
     @POST(TASK_ENDPOINT)
-    fun doTaskRegister(@Header("Authorization") header: String, @Path("userId") userId: Long, @Body registerTaskRequest: RegisterTaskRequest): Observable<Task>
+    fun doTaskRegister(@Header("Authorization") header: String, @Path("userId") clientId: Long, @Body registerTaskRequest: RegisterTaskRequest): Observable<Task>
 
     @GET(TASK_ENDPOINT)
-    fun getTasks(@Header("Authorization") header: String, @Path("userId") userId: Long, @Query("page") page: Int): Observable<List<Task>>
+    fun getTasks(@Header("Authorization") header: String, @Path("userId") clientId: Long, @Query("page") page: Int): Observable<List<Task>>
 }

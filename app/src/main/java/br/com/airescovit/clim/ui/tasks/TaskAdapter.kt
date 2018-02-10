@@ -22,13 +22,13 @@ class TaskAdapter(val mPresenter: TaskMvpPresenter<TasksMvpView>) : RecyclerView
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-//        if (position == 0) {
-////            (holder as AddTaskViewHolder).rootView.setOnClickListener {
-////                mPresenter.onFabClick()
-////            }
-//        } else if (position != 0 && mPresenter.getTasks()[position - 1] != null) {
-//
-//        }
+        if (position == 0) {
+            (holder as AddTaskViewHolder).rootView.setOnClickListener {
+                mPresenter.onFabClick()
+            }
+        } /*else if (position != 0 && mPresenter.getTasks()[position - 1] != null) {
+
+        }*/
 
     }
 

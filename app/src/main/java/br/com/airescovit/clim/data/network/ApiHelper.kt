@@ -25,5 +25,6 @@ interface ApiHelper {
 
 
     fun doRegisterTask(header: String, userId: Long, registerTaskRequest: RegisterTaskRequest): Observable<Task>
+
     fun getTasksAPI(header: String, userId: Long, page: Int): Observable<List<Task>>
 }
