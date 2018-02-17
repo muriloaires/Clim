@@ -1,7 +1,6 @@
 package br.com.airescovit.clim.ui.tasks
 
 import br.com.airescovit.clim.data.DataManager
-import br.com.airescovit.clim.data.db.model.Client
 import br.com.airescovit.clim.data.db.model.Task
 import br.com.airescovit.clim.ui.base.BasePresenter
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
@@ -14,18 +13,19 @@ import javax.inject.Inject
  */
 class TaskPresenter<V : TasksMvpView> @Inject constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), TaskMvpPresenter<V> {
 
-    private var tasks: MutableList<Task?> = mutableListOf()
+    private var tasks: MutableList<Any?> = mutableListOf()
     private var page = 1
 
     init {
-        tasks.add(0, null)
+        tasks.add(0, Any())
+        tasks.add(1, null)
     }
 
     override fun onAddTaskActivityReturn() {
-        loadAllClientsFromDb()
+        loadAllTaskssFromDb()
     }
 
-    private fun loadAllClientsFromDb() {
+    private fun loadAllTaskssFromDb() {
         dataManager.loadAllTasks()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -43,12 +43,12 @@ class TaskPresenter<V : TasksMvpView> @Inject constructor(dataManager: DataManag
         getMvpView()?.openAddTasksActivity()
     }
 
-    override fun getTasks(): List<Task?> {
+    override fun getTasks(): List<Any?> {
         return tasks
     }
 
     override fun onViewReady() {
-        loadAllClientsFromDb()
+        loadAllTaskssFromDb()
     }
 
     private fun loadFromAPI(page: Int) {
@@ -57,6 +57,9 @@ class TaskPresenter<V : TasksMvpView> @Inject constructor(dataManager: DataManag
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ tasks ->
+                    for (task: Task in tasks) {
+                        task.attachEntities()
+                    }
                     dataManager.insertTaskList(tasks)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
@@ -65,6 +68,7 @@ class TaskPresenter<V : TasksMvpView> @Inject constructor(dataManager: DataManag
                     if (this.page == 1) {
                         getMvpView()?.setOnScrollListener()
                         this.tasks.clear()
+                        this.tasks.add(Any())
                         this.tasks.add(null)
 
 
@@ -91,5 +95,9 @@ class TaskPresenter<V : TasksMvpView> @Inject constructor(dataManager: DataManag
     override fun onRecylerLoadMore() {
         page++
         loadFromAPI(page)
+    }
+
+    override fun onBtnReagendarClick(position: Int) {
+        getMvpView()?.openWhatsApp((getTasks()[position] as Task).client.phone  )
     }
 }

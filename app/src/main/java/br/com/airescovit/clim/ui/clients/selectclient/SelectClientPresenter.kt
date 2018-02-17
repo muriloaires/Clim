@@ -1,11 +1,10 @@
-package br.com.airescovit.clim.ui.clients
+package br.com.airescovit.clim.ui.clients.selectclient
 
 import android.content.Intent
-import android.support.v4.app.Fragment
 import br.com.airescovit.clim.data.DataManager
 import br.com.airescovit.clim.data.db.model.Client
-import br.com.airescovit.clim.ui.addtask.AddTaskActivity
 import br.com.airescovit.clim.ui.base.BasePresenter
+import br.com.airescovit.clim.ui.clients.ClientsListAction
 import br.com.airescovit.clim.utils.AppConstants
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,10 +12,10 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
- * Created by murilo aires on 27/01/2018.
+ * Created by murilo aires on 12/02/2018.
  */
-class ClientsPresenter<V : ClientsMvpView> @Inject constructor(dataManager: DataManager) : BasePresenter<V>(dataManager),
-        ClientsMvpPresenter<V>, ClientsListAction {
+class SelectClientPresenter<V : SelectClientMvpView> @Inject constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), SelectClientMvpPresenter<V>, ClientsListAction {
+
 
     private var clients: MutableList<Any?> = mutableListOf()
     private var page = 1
@@ -106,19 +105,15 @@ class ClientsPresenter<V : ClientsMvpView> @Inject constructor(dataManager: Data
         getMvpView()?.openAddClientsActivity()
     }
 
-    override fun isSelection(): Boolean = false
+    override fun isSelection(): Boolean = true
 
     override fun onAddTaskClick(position: Int) {
-        val intent = Intent((getMvpView() as Fragment).context, AddTaskActivity::class.java)
-        intent.putExtra(AppConstants.CLIENT_ID_EXTRA, (clients[position] as Client).id)
-        getMvpView()?.openAddTasksActivity(intent)
-    }
-
-    override fun onItemClick(position: Int) {
         //Does nothing
     }
 
-    override fun onAddTaskActivityReturn() {
-        getMvpView()?.showTaskFragment()
+    override fun onItemClick(position: Int) {
+        val data = Intent()
+        data.putExtra(AppConstants.CLIENT_ID_EXTRA, (clients[position] as Client).id)
+        getMvpView()?.finishWithOkResult(data)
     }
 }

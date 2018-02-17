@@ -2,19 +2,20 @@ package br.com.airescovit.clim.di.module
 
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import br.com.airescovit.clim.di.ActivityContext
 import br.com.airescovit.clim.di.PerActivity
-import br.com.airescovit.clim.ui.addclients.AddClientsMvpPresenter
-import br.com.airescovit.clim.ui.addclients.AddClientsMvpView
-import br.com.airescovit.clim.ui.addclients.AddClientsPresenter
 import br.com.airescovit.clim.ui.addtask.AddTaskMvpPresenter
 import br.com.airescovit.clim.ui.addtask.AddTaskMvpView
 import br.com.airescovit.clim.ui.addtask.AddTaskPresenter
 import br.com.airescovit.clim.ui.clients.ClientsMvpPresenter
 import br.com.airescovit.clim.ui.clients.ClientsMvpView
 import br.com.airescovit.clim.ui.clients.ClientsPresenter
+import br.com.airescovit.clim.ui.clients.addclients.AddClientsMvpPresenter
+import br.com.airescovit.clim.ui.clients.addclients.AddClientsMvpView
+import br.com.airescovit.clim.ui.clients.addclients.AddClientsPresenter
+import br.com.airescovit.clim.ui.clients.selectclient.SelectClientMvpPresenter
+import br.com.airescovit.clim.ui.clients.selectclient.SelectClientMvpView
+import br.com.airescovit.clim.ui.clients.selectclient.SelectClientPresenter
 import br.com.airescovit.clim.ui.login.LoginMvpPresenter
 import br.com.airescovit.clim.ui.login.LoginMvpView
 import br.com.airescovit.clim.ui.login.LoginPresenter
@@ -34,7 +35,6 @@ import br.com.airescovit.clim.ui.splash.SplashPresenter
 import br.com.airescovit.clim.ui.tasks.TaskMvpPresenter
 import br.com.airescovit.clim.ui.tasks.TaskPresenter
 import br.com.airescovit.clim.ui.tasks.TasksMvpView
-import br.com.airescovit.clim.ui.utils.EndlessScrollListener
 import dagger.Module
 import dagger.Provides
 
@@ -94,6 +94,12 @@ class ActivityModule(activity: AppCompatActivity) {
     @Provides
     fun provideClientsPresenter(clientsPresenter: ClientsPresenter<ClientsMvpView>): ClientsMvpPresenter<ClientsMvpView> {
         return clientsPresenter
+    }
+
+    @PerActivity
+    @Provides
+    fun provideSelectClientsPresenter(mSelectClientPresenter: SelectClientPresenter<SelectClientMvpView>): SelectClientMvpPresenter<SelectClientMvpView> {
+        return mSelectClientPresenter
     }
 
     @Provides

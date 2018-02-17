@@ -8,9 +8,11 @@ import io.reactivex.Observable
  * Created by Logics on 12/01/2018.
  */
 interface DbHelper {
+
     fun insertClient(client: Client): Observable<Long>
     fun insertClientList(clients: List<Client>): Observable<Unit>
     fun loadAllClients(): Observable<List<Client>>
+    fun loadClient(clientId: Long): Observable<Client>
 
     fun insertTask(task: Task): Observable<Long>
     fun insertTaskList(tasks: List<Task>): Observable<Unit>

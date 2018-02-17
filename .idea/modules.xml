@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Clim2.iml" filepath="$PROJECT_DIR$/Clim2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Clim.iml" filepath="$PROJECT_DIR$/.idea/Clim.iml" />
+      <module fileurl="file://C:\Users\murilo aires\AndroidStudioProjects\Clim\Clim2.iml" filepath="C:\Users\murilo aires\AndroidStudioProjects\Clim\Clim2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

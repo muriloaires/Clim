@@ -2,7 +2,6 @@ package br.com.airescovit.clim.ui.clients
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import br.com.airescovit.clim.data.db.model.Client
 import kotlinx.android.synthetic.main.client_item.view.*
 
 /**
@@ -15,5 +14,6 @@ class ClientViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
     val textStreetNeighborhood = view.textStreetNeighborhood
     val textPostalCode = view.textPostalCode
     val imgAgendarVisita = view.imgAgendarVisita
+    val root = view.root
 
 }

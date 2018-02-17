@@ -109,8 +109,12 @@ class AppDataManager @Inject constructor(@ApplicationContext context: Context, d
         return mDbHelper.loadAllClients()
     }
 
-    override fun doRegisterTask(header: String, userId: Long, registerTaskRequest: RegisterTaskRequest): Observable<Task> {
-        return mApiHelper.doRegisterTask(header, userId, registerTaskRequest)
+    override fun loadClient(clientId: Long): Observable<Client> {
+        return mDbHelper.loadClient(clientId)
+    }
+
+    override fun doRegisterTask(header: String, clientId: Long, registerTaskRequest: RegisterTaskRequest): Observable<Task> {
+        return mApiHelper.doRegisterTask(header, clientId, registerTaskRequest)
     }
 
     override fun insertTask(task: Task): Observable<Long> {

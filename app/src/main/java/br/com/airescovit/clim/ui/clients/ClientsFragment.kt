@@ -9,8 +9,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
 import br.com.airescovit.clim.R
-import br.com.airescovit.clim.ui.addclients.AddClientsActivity
 import br.com.airescovit.clim.ui.base.BaseFragment
+import br.com.airescovit.clim.ui.clients.addclients.AddClientsActivity
+import br.com.airescovit.clim.ui.main.MainActivity
+import br.com.airescovit.clim.ui.tasks.TasksFragment
 import br.com.airescovit.clim.ui.utils.EndlessScrollListener
 import kotlinx.android.synthetic.main.fragment_clients.*
 import javax.inject.Inject
@@ -29,10 +31,12 @@ class ClientsFragment : BaseFragment(), ClientsMvpView {
         const val REQUEST_ADD_CLIENT: Int = 1
     }
 
+
+    @Inject
+    lateinit var mPresenter: ClientsMvpPresenter<ClientsMvpView>
     private lateinit var clientsAdapter: ClientsAdapter
     private lateinit var mScrollListener: EndlessScrollListener
-    @Inject lateinit var mPresenter: ClientsMvpPresenter<ClientsMvpView>
-    lateinit var mLinearLayoutManager: LinearLayoutManager
+    private lateinit var mLinearLayoutManager: LinearLayoutManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -50,7 +54,7 @@ class ClientsFragment : BaseFragment(), ClientsMvpView {
         noClientsLayout.setOnClickListener({ mPresenter.onFabClick() })
         mLinearLayoutManager = LinearLayoutManager(context)
         recyclerClients.layoutManager = mLinearLayoutManager
-        clientsAdapter = ClientsAdapter(mPresenter)
+        clientsAdapter = ClientsAdapter(mPresenter as ClientsListAction)
         recyclerClients.adapter = clientsAdapter
 
         mScrollListener = object : EndlessScrollListener(mLinearLayoutManager) {
@@ -77,6 +81,12 @@ class ClientsFragment : BaseFragment(), ClientsMvpView {
                     mPresenter.onAddClientsActivityReturn()
                 }
             }
+            TasksFragment.REQUEST_ADD_TASK -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    mPresenter.onAddTaskActivityReturn()
+                }
+            }
+
         }
     }
 
@@ -104,5 +114,17 @@ class ClientsFragment : BaseFragment(), ClientsMvpView {
     override fun hideNoClientView() {
         noClientsLayout.visibility = View.GONE
         recyclerClients.visibility = View.VISIBLE
+    }
+
+    override fun openAddTasksActivity(intent: Intent) {
+        startActivityForResult(intent, TasksFragment.REQUEST_ADD_TASK)
+    }
+
+    override fun finishWithOkResult(data: Intent) {
+        //Does nothing
+    }
+
+    override fun showTaskFragment() {
+        (getBaseActivity() as MainActivity).selectTaskTab()
     }
 }

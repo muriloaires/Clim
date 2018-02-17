@@ -1,4 +1,4 @@
-package br.com.airescovit.clim.ui.addclients
+package br.com.airescovit.clim.ui.clients.addclients
 
 import br.com.airescovit.clim.ui.base.MvpView
 

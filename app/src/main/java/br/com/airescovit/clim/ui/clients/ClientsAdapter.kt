@@ -39,32 +39,33 @@ class ClientsAdapter(val mClientsListAction: ClientsListAction) : RecyclerView.A
             } else {
                 holder.imgAgendarVisita.visibility = View.VISIBLE
             }
+
+            holder.imgAgendarVisita.setOnClickListener({ mClientsListAction.onAddTaskClick(position) })
+            holder.root.setOnClickListener({ mClientsListAction.onItemClick(position) })
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            CLIENT -> {
-                val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.client_item, parent, false)
-                ClientViewHolder(view)
-            }
-            LOADING -> {
-                val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.load_item, parent, false)
-                LoadViewHolder(view)
-            }
-            else -> {
-                val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.add_client_item, parent, false)
-                AddClientViewHolder(view)
-            }
+        if (viewType == CLIENT) {
+            val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.client_item, parent, false)
+            return ClientViewHolder(view)
+        } else if (viewType == LOADING) {
+            val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.load_item, parent, false)
+            return LoadViewHolder(view)
+        } else {
+            val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.add_client_item, parent, false)
+            return AddClientViewHolder(view)
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when {
-            mClientsListAction.getList()[position] is Any -> ADD
-            mClientsListAction.getList()[position] is Client -> CLIENT
-            else -> LOADING
+        if (mClientsListAction.getList()[position] is Client) {
+            return CLIENT
+        } else if (mClientsListAction.getList()[position] is Any) {
+            return ADD
+        } else {
+            return LOADING
         }
     }
 }

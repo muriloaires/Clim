@@ -5,7 +5,6 @@ import br.com.airescovit.clim.data.db.model.DaoMaster
 import br.com.airescovit.clim.data.db.model.DaoSession
 import br.com.airescovit.clim.data.db.model.Task
 import io.reactivex.Observable
-import java.util.concurrent.Callable
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,6 +21,12 @@ class AppDbHelper @Inject constructor(dbOpenHelper: DbOpenHelper) : DbHelper {
         return Observable.fromCallable<Long>({
             mDaoSession.addressDao.insertOrReplace(client.address)
             mDaoSession.clientDao.insertOrReplace(client)
+        })
+    }
+
+    override fun loadClient(clientId: Long): Observable<Client> {
+        return Observable.fromCallable<Client>({
+            mDaoSession.clientDao.load(clientId)
         })
     }
 
@@ -42,6 +47,8 @@ class AppDbHelper @Inject constructor(dbOpenHelper: DbOpenHelper) : DbHelper {
 
     override fun insertTask(task: Task): Observable<Long> {
         return Observable.fromCallable<Long>({
+            mDaoSession.addressDao.insertOrReplace(task.client.address)
+            mDaoSession.clientDao.insertOrReplace(task.client)
             mDaoSession.taskDao.insertOrReplace(task)
         })
 

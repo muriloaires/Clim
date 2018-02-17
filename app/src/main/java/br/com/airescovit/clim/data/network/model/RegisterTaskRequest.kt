@@ -11,5 +11,5 @@ data class RegisterTaskRequest(@SerializedName("task") val task: TaskRequest)
 data class TaskRequest(@SerializedName("title") val title: String,
                        @SerializedName("description") val description: String,
                        @SerializedName("start_at") val startAt: Date,
-                       @SerializedName("finish_at") val finishAt: Date,
+                       @SerializedName("finish_at") val finishAt: Date?,
                        @SerializedName("service_fee") val serviceFee: Double)

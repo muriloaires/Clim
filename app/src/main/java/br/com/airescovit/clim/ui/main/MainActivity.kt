@@ -1,11 +1,9 @@
 package br.com.airescovit.clim.ui.main
 
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
-import android.widget.ImageView
 import android.widget.TextView
 import br.com.airescovit.clim.R
 import br.com.airescovit.clim.ui.base.BaseActivity
@@ -15,7 +13,8 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
 
-    @Inject lateinit var mPagerAdapter: PagerAdapter
+    @Inject
+    lateinit var mPagerAdapter: PagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,5 +45,10 @@ class MainActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
     override fun onTabSelected(tab: TabLayout.Tab?) {
         view_pager.currentItem = tab?.position!!
         tab.customView?.findViewById<TextView>(R.id.tabText)?.setTextColor(Color.WHITE)
+    }
+
+    fun selectTaskTab() {
+        tab_layout.getTabAt(0)?.select()
+        mPagerAdapter.getTasksFragment().mPresenter.onViewReady()
     }
 }

@@ -8,5 +8,6 @@ interface ClientsListAction {
     fun onAddClientClick()
     fun isSelection(): Boolean
     fun onAddTaskClick(position: Int)
+    fun onItemClick(position: Int)
 
 }

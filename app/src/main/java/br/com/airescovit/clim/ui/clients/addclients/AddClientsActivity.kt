@@ -1,14 +1,12 @@
-package br.com.airescovit.clim.ui.addclients
+package br.com.airescovit.clim.ui.clients.addclients
 
 import android.app.Activity
 import android.content.Intent
 import android.location.Address
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ArrayAdapter
 import br.com.airescovit.clim.R
 import br.com.airescovit.clim.ui.base.BaseActivity
 import br.com.airescovit.clim.utils.AppConstants
@@ -47,7 +45,7 @@ class AddClientsActivity : BaseActivity(), AddClientsMvpView {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.check -> consume {
-            mPresenter.onCheckbuttonClick(inputClientName.text.toString(), inputClientPhone.text.toString(), inputPostalCode.text.toString(), inputState.text.toString(), inputCity.text.toString(), inputNeighborhood.text.toString(), inputStreet.text.toString(), inputComplemento.text.toString(), inputNumber.text.toString(), address?.latitude, address?.longitude, spinnerCountries.selectedItem.toString())
+            mPresenter.onCheckbuttonClick(inputClientName.text.toString(), inputClientPhone.text.toString(), inputPostalCode.text.toString(), inputState.text.toString(), inputCity.text.toString(), inputNeighborhood.text.toString(), inputStreet.text.toString(), inputComplemento.text.toString(), inputNumber.text.toString(), address?.latitude, address?.longitude, spinnerCountries.selectedCountryName)
         }
         else -> super.onOptionsItemSelected(item)
     }
@@ -73,8 +71,6 @@ class AddClientsActivity : BaseActivity(), AddClientsMvpView {
         inputCity.setText(address?.subAdminArea)
         inputNeighborhood.setText(address?.subLocality)
         inputStreet.setText(address?.thoroughfare)
-        val position = countriesString.indexOf(address!!.countryName)
-        spinnerCountries.setSelection(position)
     }
 
     override fun onIncorrectClientName(resId: Int) {
@@ -103,9 +99,6 @@ class AddClientsActivity : BaseActivity(), AddClientsMvpView {
     }
 
     override fun configureSpinners(countriesString: List<String>, defaultPosition: Int) {
-        this.countriesString = countriesString
-        spinnerCountries.adapter = ArrayAdapter<String>(this, R.layout.spinner_item, countriesString)
-        spinnerCountries.setSelection(defaultPosition)
     }
 
     override fun finishWithOkResult() {

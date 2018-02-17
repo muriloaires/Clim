@@ -7,7 +7,7 @@
     tools:context="br.com.airescovit.clim.ui.addtask.AddTaskActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
+        android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -20,7 +20,7 @@
         app:title="Criar um serviço" />
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/layoutSelectClient"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
 
         <ImageView
@@ -44,6 +44,7 @@
             android:src="@drawable/ic_man" />
 
         <TextView
+            android:id="@+id/textClientName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -60,9 +61,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/layoutSelectClient">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/editTitle"
@@ -108,6 +110,7 @@
                     android:drawableLeft="@drawable/ic_wallet"
                     android:drawablePadding="8dp"
                     android:hint="@string/valor_hint"
+                    android:inputType="number"
                     android:maxLines="1" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -132,6 +135,7 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_calendar"
                     android:drawablePadding="8dp"
+                    android:editable="false"
                     android:hint="@string/data_hint"
                     android:maxLines="1" />
             </android.support.design.widget.TextInputLayout>

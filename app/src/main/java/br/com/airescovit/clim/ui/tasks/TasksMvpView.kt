@@ -14,4 +14,5 @@ interface TasksMvpView : MvpView {
     fun setOnScrollListener()
     fun showNoTasksView()
     fun hideNoTaskView()
+    fun openWhatsApp(phone: String)
 }

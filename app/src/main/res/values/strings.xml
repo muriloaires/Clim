@@ -50,4 +50,6 @@
     <string name="description_hint">Descrição</string>
     <string name="valor_hint">Valor *</string>
     <string name="data_hint">Data *</string>
+    <string name="select_a_client">Selecione um cliente</string>
+    <string name="pick_a_cliente">Escolha um cliente</string>
 </resources>

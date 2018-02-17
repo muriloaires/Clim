@@ -3,23 +3,22 @@ package br.com.airescovit.clim.ui.tasks
 
 import android.app.Activity
 import android.content.Intent
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.provider.ContactsContract.PhoneLookup
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.*
-
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import br.com.airescovit.clim.R
-import br.com.airescovit.clim.ui.addclients.AddClientsActivity
 import br.com.airescovit.clim.ui.addtask.AddTaskActivity
 import br.com.airescovit.clim.ui.base.BaseFragment
-import br.com.airescovit.clim.ui.clients.ClientsAdapter
-import br.com.airescovit.clim.ui.clients.ClientsFragment
-import br.com.airescovit.clim.ui.clients.ClientsFragment.Companion.REQUEST_ADD_CLIENT
-import br.com.airescovit.clim.ui.clients.ClientsMvpPresenter
-import br.com.airescovit.clim.ui.clients.ClientsMvpView
 import br.com.airescovit.clim.ui.utils.EndlessScrollListener
-import kotlinx.android.synthetic.main.fragment_clients.*
 import kotlinx.android.synthetic.main.fragment_tasks.*
 import javax.inject.Inject
 
@@ -34,13 +33,14 @@ class TasksFragment : BaseFragment(), TasksMvpView {
             return TasksFragment()
         }
 
-        const val REQUEST_ADD_TASK: Int = 1
+        const val REQUEST_ADD_TASK: Int = 2
     }
 
 
     private lateinit var mTasksAdapter: TaskAdapter
     private lateinit var mScrollListener: EndlessScrollListener
-    @Inject lateinit var mPresenter: TaskMvpPresenter<TasksMvpView>
+    @Inject
+    lateinit var mPresenter: TaskMvpPresenter<TasksMvpView>
     lateinit var mLinearLayoutManager: LinearLayoutManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -82,6 +82,28 @@ class TasksFragment : BaseFragment(), TasksMvpView {
                     mPresenter.onAddTaskActivityReturn()
                 }
             }
+            11 -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    try {
+                        var phoneNo: String? = null
+                        var name: String? = null
+                        var cursor: Cursor?
+                        val uri = data?.getData()
+                        cursor = activity?.contentResolver?.query(uri, null, null, null, null)
+                        cursor?.moveToFirst()
+                        val phoneIndex = cursor?.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                        val nameIndex = cursor?.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+                        phoneNo = cursor?.getString(phoneIndex!!)
+                        name = cursor?.getString(nameIndex!!)
+
+                        Log.e("Name and Contact number", name + "," + phoneNo)
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
+                }
+            }
         }
     }
 
@@ -110,5 +132,69 @@ class TasksFragment : BaseFragment(), TasksMvpView {
         noTaskLayout.visibility = View.GONE
         recyclerTasks.visibility = View.VISIBLE
     }
+
+
+    override fun openWhatsApp(phone: String) {
+        val contactId = contactIdByPhoneNumber("81036616")
+
+        val contactCursor = activity?.contentResolver?.query(
+                ContactsContract.RawContacts.CONTENT_URI,
+                arrayOf(ContactsContract.RawContacts.CONTACT_ID),
+                ContactsContract.RawContacts.ACCOUNT_TYPE + "= ?" + ContactsContract.Data._ID + "= ?",
+                arrayOf("com.whatsapp", contactId),
+                null)
+
+        if (contactCursor!!.moveToFirst()) {
+            val whatsappContactId = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.RawContacts.CONTACT_ID))
+        }
+
+        val resolver = context?.contentResolver
+        val cursor = resolver?.query(
+                ContactsContract.Data.CONTENT_URI, null, null, null,
+                ContactsContract.Contacts.DISPLAY_NAME)
+
+//Now read data from cursor like
+
+        while (cursor!!.moveToNext()) {
+            val id = cursor.getLong(cursor.getColumnIndex(ContactsContract.Data._ID))
+            val displayName = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME))
+            val mimeType = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.MIMETYPE))
+
+            Log.d("Data", id.toString() + " " + displayName + " " + mimeType)
+
+        }
+
+        val intent = Intent()
+        intent.action = Intent.ACTION_VIEW
+
+        intent.setDataAndType(Uri.parse("content://com.android.contacts/data/19809"),
+                "vnd.android.cursor.item/vnd.com.whatsapp.profile")
+        intent.`package` = "com.whatsapp"
+
+        startActivity(intent)
+
+    }
+
+    fun contactIdByPhoneNumber(phoneNumber: String?): String? {
+        var contactId: String? = null
+        if (phoneNumber != null && phoneNumber.isNotEmpty()) {
+            val contentResolver = activity?.contentResolver
+
+            val uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber))
+
+            val projection = arrayOf(PhoneLookup._ID)
+
+            val cursor = contentResolver?.query(uri, projection, null, null, null)
+
+            if (cursor != null) {
+                while (cursor!!.moveToNext()) {
+                    contactId = cursor!!.getString(cursor!!.getColumnIndexOrThrow(PhoneLookup._ID))
+                }
+                cursor!!.close()
+            }
+        }
+        return contactId
+    }
+
 
 }// Required empty public constructor

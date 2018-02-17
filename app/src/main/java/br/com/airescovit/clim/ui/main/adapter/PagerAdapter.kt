@@ -13,6 +13,7 @@ import br.com.airescovit.clim.ui.tasks.TasksFragment
 class PagerAdapter(fragmentManager: FragmentManager, val numOfTabs: Int) : FragmentStatePagerAdapter(fragmentManager) {
 
     private lateinit var clientsFragment: ClientsFragment
+
     private lateinit var taskFragment: TasksFragment
 
 
@@ -36,5 +37,8 @@ class PagerAdapter(fragmentManager: FragmentManager, val numOfTabs: Int) : Fragm
         return createdFragment
     }
 
+    fun getTasksFragment(): TasksFragment {
+        return taskFragment
+    }
 
 }
