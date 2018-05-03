@@ -8,13 +8,14 @@ import br.com.airescovit.clim.ui.clients.ClientsListAction
 import br.com.airescovit.clim.utils.AppConstants
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
  * Created by murilo aires on 12/02/2018.
  */
-class SelectClientPresenter<V : SelectClientMvpView> @Inject constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), SelectClientMvpPresenter<V>, ClientsListAction {
+class SelectClientPresenter<V : SelectClientMvpView> @Inject constructor(dataManager: DataManager, compositeDisposable: CompositeDisposable) : BasePresenter<V>(dataManager, compositeDisposable), SelectClientMvpPresenter<V>, ClientsListAction {
 
 
     private var clients: MutableList<Any?> = mutableListOf()
@@ -115,5 +116,33 @@ class SelectClientPresenter<V : SelectClientMvpView> @Inject constructor(dataMan
         val data = Intent()
         data.putExtra(AppConstants.CLIENT_ID_EXTRA, (clients[position] as Client).id)
         getMvpView()?.finishWithOkResult(data)
+    }
+
+    override fun getClientName(position: Int): String {
+        return (clients[position] as Client).name
+    }
+
+    override fun getClientStateCity(position: Int): String {
+        return try {
+            (clients[position] as Client).address.state + " - " + (clients[position] as Client).address.city
+        } catch (e: Exception) {
+            " - "
+        }
+    }
+
+    override fun getClientStreetNeighborhood(position: Int): String {
+        return try {
+            (clients[position] as Client).address.street + " - " + (clients[position] as Client).address.neighborhood
+        } catch (e: Exception) {
+            " - "
+        }
+    }
+
+    override fun getClientZipCode(position: Int): String {
+        return try {
+            (clients[position] as Client).address.postalCode
+        } catch (e: Exception) {
+            " - "
+        }
     }
 }

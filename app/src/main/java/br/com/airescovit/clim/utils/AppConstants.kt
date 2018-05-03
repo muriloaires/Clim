@@ -15,7 +15,7 @@ class AppConstants {
 
         const val BASE_URL: String = "https://clim-api-staging.herokuapp.com/"
         const val DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.SSSZ"
-        const val DATE_FORMAT_EXIBITION = "dd/MM/yyyy"
+        const val DATE_FORMAT_EXIBITION = "dd/MM/yyyy 'às' HH:mm"
         const val API_VERSION: String = "api/v1/"
 
         const val SUCCESS_RESULT = 0

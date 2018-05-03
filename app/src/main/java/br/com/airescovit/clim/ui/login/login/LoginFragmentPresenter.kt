@@ -8,13 +8,14 @@ import br.com.airescovit.clim.ui.base.BasePresenter
 import br.com.airescovit.clim.utils.TextUtils
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
  * Created by Logics on 15/01/2018.
  */
-class LoginFragmentPresenter<V : LoginFragmentMvpView> @Inject constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), LoginFragmentMvpPresenter<V> {
+class LoginFragmentPresenter<V : LoginFragmentMvpView> @Inject constructor(dataManager: DataManager, compositeDisposable: CompositeDisposable) : BasePresenter<V>(dataManager, compositeDisposable), LoginFragmentMvpPresenter<V> {
     override fun onButtonCriarContaClick() {
         getMvpView()?.showRegisterFragment()
     }

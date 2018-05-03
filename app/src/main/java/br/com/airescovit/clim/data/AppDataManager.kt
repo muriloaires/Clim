@@ -1,6 +1,9 @@
 package br.com.airescovit.clim.data
 
 import android.content.Context
+import android.net.Uri
+import br.com.airescovit.clim.data.content.ContentHelper
+import br.com.airescovit.clim.data.content.model.Contact
 import br.com.airescovit.clim.data.db.DbHelper
 import br.com.airescovit.clim.data.db.model.Client
 import br.com.airescovit.clim.data.db.model.Task
@@ -21,12 +24,10 @@ import javax.inject.Singleton
  * Created by Logics on 12/01/2018.
  */
 @Singleton
-class AppDataManager @Inject constructor(@ApplicationContext context: Context, dbHelper: DbHelper, preferenceHelper: PreferenceHelper, apiHelper: ApiHelper) : DataManager {
+class AppDataManager @Inject constructor(@ApplicationContext val context: Context, val mDbHelper: DbHelper,
+                                         val mPreferencesHelper: PreferenceHelper, val mApiHelper: ApiHelper,
+                                         val mContentHelper: ContentHelper) : DataManager {
 
-    private var mContext: Context = context
-    private var mDbHelper: DbHelper = dbHelper
-    private var mPreferencesHelper: PreferenceHelper = preferenceHelper
-    private var mApiHelper: ApiHelper = apiHelper
 
     override fun setUserAsLoggedOut() {
         updateUserInfo(null, null, DataManager.LoginMode.LOGGED_IN_MODE_LOGGED_OUT, null, null)
@@ -131,5 +132,13 @@ class AppDataManager @Inject constructor(@ApplicationContext context: Context, d
 
     override fun getTasksAPI(header: String, userId: Long, page: Int): Observable<List<Task>> {
         return mApiHelper.getTasksAPI(header, userId, page)
+    }
+
+    override fun getContact(uri: Uri): Observable<Contact> {
+        return mContentHelper.getContact(uri)
+    }
+
+    override fun getWhatsAppProfileId(name: String): Observable<String> {
+        return mContentHelper.getWhatsAppProfileId(name)
     }
 }

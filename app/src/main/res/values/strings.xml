@@ -52,4 +52,15 @@
     <string name="data_hint">Data *</string>
     <string name="select_a_client">Selecione um cliente</string>
     <string name="pick_a_cliente">Escolha um cliente</string>
+    <string name="new_or_from_contacts">Escolher dos contatos ou criar um novo?</string>
+    <string name="contacts">Contatos</string>
+    <string name="newclient">Novo</string>
+
+    <array name="interval">
+        <item>Hora(s)</item>
+        <item>Dia(s)</item>
+        <item>Semana(s)</item>
+        <item>Mês(es)</item>
+    </array>
+
 </resources>

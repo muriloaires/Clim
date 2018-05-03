@@ -8,13 +8,15 @@ import br.com.airescovit.clim.ui.base.BasePresenter
 import br.com.airescovit.clim.utils.TextUtils
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
  * Created by Logics on 16/01/2018.
  */
-class RegisterPresenter<V : RegisterMvpView> @Inject constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), RegisterMvpPresenter<V> {
+class RegisterPresenter<V : RegisterMvpView> @Inject constructor(dataManager: DataManager, compositeDisposable: CompositeDisposable)
+    : BasePresenter<V>(dataManager, compositeDisposable), RegisterMvpPresenter<V> {
 
     override fun onBtnRegisterClick(firstName: String, lastName: String, email: String, password: String, confirmPassword: String) {
         when {

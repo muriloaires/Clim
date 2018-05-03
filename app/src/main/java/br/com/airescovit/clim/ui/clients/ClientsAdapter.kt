@@ -26,11 +26,10 @@ class ClientsAdapter(val mClientsListAction: ClientsListAction) : RecyclerView.A
                 mClientsListAction.onAddClientClick()
             }
         } else if (holder is ClientViewHolder) {
-            val client = mClientsListAction.getList()[position] as Client
-            holder.textClientName.text = client?.name
-            holder.textStateCity.text = client?.address?.state + " - " + client?.address?.city
-            holder.textStreetNeighborhood.text = client?.address?.street + " - " + client?.address?.neighborhood
-            holder.textPostalCode.text = client?.address?.postalCode
+            holder.textClientName.text = mClientsListAction.getClientName(position)
+            holder.textStateCity.text = mClientsListAction.getClientStateCity(position)//client?.address?.state + " - " + client?.address?.city
+            holder.textStreetNeighborhood.text = mClientsListAction.getClientStreetNeighborhood(position)//client?.address?.street + " - " + client?.address?.neighborhood
+            holder.textPostalCode.text = mClientsListAction.getClientZipCode(position)//client?.address?.postalCode
             holder.imgAgendarVisita.setOnClickListener {
                 mClientsListAction.onAddTaskClick(position)
             }

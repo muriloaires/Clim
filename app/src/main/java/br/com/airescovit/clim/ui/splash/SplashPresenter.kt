@@ -3,12 +3,14 @@ package br.com.airescovit.clim.ui.splash
 import android.os.Handler
 import br.com.airescovit.clim.data.DataManager
 import br.com.airescovit.clim.ui.base.BasePresenter
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 /**
  * Created by Logics on 12/01/2018.
  */
-class SplashPresenter<V : SplashMvpView> @Inject constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), SplashMvpPresenter<V> {
+class SplashPresenter<V : SplashMvpView> @Inject constructor(dataManager: DataManager, compositeDisposable: CompositeDisposable)
+    : BasePresenter<V>(dataManager, compositeDisposable), SplashMvpPresenter<V> {
 
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)

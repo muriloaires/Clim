@@ -1,5 +1,6 @@
 package br.com.airescovit.clim.data
 
+import br.com.airescovit.clim.data.content.ContentHelper
 import br.com.airescovit.clim.data.db.DbHelper
 import br.com.airescovit.clim.data.network.ApiHelper
 import br.com.airescovit.clim.data.prefs.PreferenceHelper
@@ -7,7 +8,7 @@ import br.com.airescovit.clim.data.prefs.PreferenceHelper
 /**
  * Created by Logics on 12/01/2018.
  */
-interface DataManager : DbHelper, PreferenceHelper, ApiHelper {
+interface DataManager : DbHelper, PreferenceHelper, ApiHelper, ContentHelper {
 
     fun setUserAsLoggedOut()
     fun updateUserInfo(accessToken: String?, userId: Long?, loginMode: LoginMode, userName: String?, userEmail: String?)

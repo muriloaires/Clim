@@ -21,4 +21,6 @@ interface AddTaskMvpView : MvpView {
 
     fun finishWithOkResult()
 
+    fun showTimePicker()
+
 }

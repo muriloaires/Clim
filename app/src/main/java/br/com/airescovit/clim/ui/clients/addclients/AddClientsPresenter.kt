@@ -8,6 +8,7 @@ import br.com.airescovit.clim.data.network.model.RegisterClientRequest
 import br.com.airescovit.clim.ui.base.BasePresenter
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 import javax.inject.Inject
@@ -15,7 +16,7 @@ import javax.inject.Inject
 /**
  * Created by murilo aires on 29/01/2018.
  */
-class AddClientsPresenter<V : AddClientsMvpView> @Inject constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), AddClientsMvpPresenter<V> {
+class AddClientsPresenter<V : AddClientsMvpView> @Inject constructor(dataManager: DataManager, compositeDisposable: CompositeDisposable) : BasePresenter<V>(dataManager, compositeDisposable), AddClientsMvpPresenter<V> {
 
 
     override fun onCheckbuttonClick(clientName: String, clientPhone: String, postalCode: String?, state: String, city: String, neighborhood: String?, street: String, complement: String?, number: String?, latitude: Double?, longitude: Double?, country: String) {

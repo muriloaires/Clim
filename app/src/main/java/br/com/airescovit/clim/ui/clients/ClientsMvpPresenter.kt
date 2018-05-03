@@ -1,5 +1,6 @@
 package br.com.airescovit.clim.ui.clients
 
+import android.net.Uri
 import br.com.airescovit.clim.ui.base.MvpPresenter
 
 /**
@@ -16,5 +17,11 @@ interface ClientsMvpPresenter<V : ClientsMvpView> : MvpPresenter<V> {
     fun onRecylerLoadmore()
 
     fun onAddTaskActivityReturn()
+
+    fun onAddFromContactsSelected()
+
+    fun onNewClientSelected()
+
+    fun onContactPicked(data: Uri)
 
 }

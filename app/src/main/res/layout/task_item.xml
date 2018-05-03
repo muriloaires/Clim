@@ -13,8 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/background_bordered_light_gray"
         android:ellipsize="end"
+        android:gravity="center"
         android:maxLines="1"
+        android:padding="4dp"
         android:text="Limpeza de Ar Condicionado Padrão"
         android:textColor="@android:color/black"
         android:textSize="18sp"
@@ -27,17 +30,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="HOJE"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView7"
-        app:layout_constraintStart_toEndOf="@+id/imageView5" />
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textClientName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="Seu Raimundo Pereira"
@@ -109,13 +114,15 @@
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
         android:weightSum="3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/textStateCity">
+        app:layout_constraintTop_toBottomOf="@+id/btnCall">
 
         <TextView
             android:layout_width="0dp"
@@ -123,6 +130,7 @@
             android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="FINALIZAR"
             android:textColor="#526b4f"
             android:textStyle="bold" />
@@ -134,6 +142,7 @@
             android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="REAGENDAR"
             android:textColor="#5e3535"
             android:textStyle="bold" />
@@ -144,8 +153,29 @@
             android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="DETALHE"
             android:textColor="@color/gray"
             android:textStyle="bold" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btnCall"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_phone"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/textStateCity" />
+
+    <ImageView
+        android:id="@+id/btnWhatsapp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_whatsapp"
+        app:layout_constraintStart_toEndOf="@+id/btnCall"
+        app:layout_constraintTop_toBottomOf="@+id/textStateCity" />
 </android.support.constraint.ConstraintLayout>

@@ -12,4 +12,12 @@ interface TaskMvpPresenter<V : TasksMvpView> : MvpPresenter<V> {
     fun onViewReady()
     fun onRecylerLoadMore()
     fun onBtnReagendarClick(position: Int)
+    fun onBtnCallClick(position: Int)
+    fun onBtnWhatsappClick(position: Int)
+    fun getClientName(position: Int): String
+    fun getClientStateCity(position: Int): String
+    fun getClientStreetAddress(position: Int): String
+    fun getTaskServiceFee(position: Int): String
+    fun getTaskTitle(position: Int): String
+    fun getTaskDate(position: Int): String
 }

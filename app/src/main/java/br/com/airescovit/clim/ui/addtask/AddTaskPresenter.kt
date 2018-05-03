@@ -9,6 +9,7 @@ import br.com.airescovit.clim.ui.base.BasePresenter
 import br.com.airescovit.clim.utils.AppConstants
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -19,7 +20,7 @@ import javax.inject.Inject
 /**
  * Created by Murilo Aires on 09/02/2018.
  */
-class AddTaskPresenter<V : AddTaskMvpView> @Inject constructor(dataManager: DataManager) : BasePresenter<V>(dataManager), AddTaskMvpPresenter<V> {
+class AddTaskPresenter<V : AddTaskMvpView> @Inject constructor(dataManager: DataManager, compositeDisposable: CompositeDisposable) : BasePresenter<V>(dataManager, compositeDisposable), AddTaskMvpPresenter<V> {
 
     private var clientId: Long? = null
     private var selectedDate: Date? = null
@@ -60,6 +61,17 @@ class AddTaskPresenter<V : AddTaskMvpView> @Inject constructor(dataManager: Data
         c.set(Calendar.MONTH, monthOfYear)
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
+        selectedDate = c.time
+
+        getMvpView()?.showTimePicker()
+
+    }
+
+    override fun onTimePicked(hour: Int, minute: Int) {
+        val c = Calendar.getInstance()
+        c.time = selectedDate
+        c.set(Calendar.HOUR_OF_DAY, hour)
+        c.set(Calendar.MINUTE, minute)
         selectedDate = c.time
         val format = SimpleDateFormat(AppConstants.DATE_FORMAT_EXIBITION, Locale.getDefault())
         val dateString = format.format(selectedDate)

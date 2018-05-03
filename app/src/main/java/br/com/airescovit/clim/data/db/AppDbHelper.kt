@@ -5,6 +5,7 @@ import br.com.airescovit.clim.data.db.model.DaoMaster
 import br.com.airescovit.clim.data.db.model.DaoSession
 import br.com.airescovit.clim.data.db.model.Task
 import io.reactivex.Observable
+import org.greenrobot.greendao.DaoException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,7 +20,11 @@ class AppDbHelper @Inject constructor(dbOpenHelper: DbOpenHelper) : DbHelper {
 
     override fun insertClient(client: Client): Observable<Long> {
         return Observable.fromCallable<Long>({
-            mDaoSession.addressDao.insertOrReplace(client.address)
+            try {
+                mDaoSession.addressDao.insertOrReplace(client.address)
+            } catch (e: DaoException) {
+
+            }
             mDaoSession.clientDao.insertOrReplace(client)
         })
     }
@@ -39,7 +44,10 @@ class AppDbHelper @Inject constructor(dbOpenHelper: DbOpenHelper) : DbHelper {
     override fun insertClientList(clients: List<Client>): Observable<Unit> {
         return Observable.fromCallable {
             for (client: Client in clients) {
-                mDaoSession.addressDao.insertOrReplace(client.address)
+                try {
+                    mDaoSession.addressDao.insertOrReplace(client.address)
+                } catch (e: DaoException) {
+                }
                 mDaoSession.clientDao.insertOrReplace(client)
             }
         }
@@ -47,7 +55,11 @@ class AppDbHelper @Inject constructor(dbOpenHelper: DbOpenHelper) : DbHelper {
 
     override fun insertTask(task: Task): Observable<Long> {
         return Observable.fromCallable<Long>({
-            mDaoSession.addressDao.insertOrReplace(task.client.address)
+            try {
+                mDaoSession.addressDao.insertOrReplace(task.client.address)
+            } catch (e: DaoException) {
+            }
+
             mDaoSession.clientDao.insertOrReplace(task.client)
             mDaoSession.taskDao.insertOrReplace(task)
         })
@@ -57,6 +69,11 @@ class AppDbHelper @Inject constructor(dbOpenHelper: DbOpenHelper) : DbHelper {
     override fun insertTaskList(tasks: List<Task>): Observable<Unit> {
         return Observable.fromCallable({
             for (task: Task in tasks) {
+                try {
+                    mDaoSession.addressDao.insertOrReplace(task.client.address)
+                } catch (e: DaoException) {
+                }
+                mDaoSession.clientDao.insertOrReplace(task.client)
                 mDaoSession.taskDao.insertOrReplace(task)
             }
         })

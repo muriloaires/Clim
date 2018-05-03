@@ -9,7 +9,7 @@ data class RegisterClientRequest(@SerializedName("client") val clientRequest: Cl
 
 data class ClientRequest(@SerializedName("name") val name: String,
                          @SerializedName("phone") val phone: String,
-                         @SerializedName("address_attributes") val addressRequest: AddressRequest)
+                         @SerializedName("address_attributes") val addressRequest: AddressRequest?)
 
 data class AddressRequest(@SerializedName("zip_code") val zipCode: String?,
                           @SerializedName("primary_address") val street: String,

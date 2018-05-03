@@ -2,10 +2,13 @@ package br.com.airescovit.clim.ui.addtask
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import br.com.airescovit.clim.R
 import br.com.airescovit.clim.ui.base.BaseActivity
@@ -39,6 +42,9 @@ class AddTaskActivity : BaseActivity(), AddTaskMvpView, DatePickerDialog.OnDateS
             }
         }
         editData.setOnClickListener({ selectDateAndHour() })
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, resources.getStringArray(R.array.interval))
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
         setSupportActionBar(toolbar)
         mPresenter.handleIntent(intent)
     }
@@ -72,9 +78,15 @@ class AddTaskActivity : BaseActivity(), AddTaskMvpView, DatePickerDialog.OnDateS
         datePickerDialog.datePicker.minDate = c.timeInMillis
         datePickerDialog.show()
 
-
     }
 
+    override fun showTimePicker() {
+        val timePickerDialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { var1, hour, minute ->
+            Log.d("", "")
+            mPresenter.onTimePicked(hour, minute)
+        }, 12, 0, true)
+        timePickerDialog.show()
+    }
 
     override fun openSelectClientActivity() {
         startActivityForResult(Intent(this, SelectClientActivity::class.java), SELECT_CLIENT)

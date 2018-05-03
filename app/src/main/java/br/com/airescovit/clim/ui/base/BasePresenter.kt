@@ -3,12 +3,13 @@ package br.com.airescovit.clim.ui.base
 import br.com.airescovit.clim.R
 import br.com.airescovit.clim.data.DataManager
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 /**
  * Created by Logics on 12/01/2018.
  */
-open class BasePresenter<V : MvpView> @Inject constructor(val dataManager: DataManager) : MvpPresenter<V> {
+open class BasePresenter<V : MvpView> @Inject constructor(val dataManager: DataManager, val mCompositeDisposable: CompositeDisposable) : MvpPresenter<V> {
 
 
     private var mMvpView: V? = null
@@ -17,6 +18,7 @@ open class BasePresenter<V : MvpView> @Inject constructor(val dataManager: DataM
     }
 
     override fun onDetach() {
+        mCompositeDisposable.dispose()
         mMvpView = null
     }
 

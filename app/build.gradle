@@ -78,6 +78,7 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.retrofitRxAdapterVersion"
 
     implementation "com.hbb20:ccp:2.1.0"
+    implementation "com.shawnlin:number-picker:2.4.6"
 
     //maps
     implementation "com.google.android.gms:play-services-location:11.8.0"

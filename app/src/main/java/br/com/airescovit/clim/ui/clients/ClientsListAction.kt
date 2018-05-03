@@ -9,5 +9,9 @@ interface ClientsListAction {
     fun isSelection(): Boolean
     fun onAddTaskClick(position: Int)
     fun onItemClick(position: Int)
+    fun getClientName(position: Int): String
+    fun getClientStateCity(position: Int): String
+    fun getClientStreetNeighborhood(position: Int): String
+    fun getClientZipCode(position: Int): String
 
 }

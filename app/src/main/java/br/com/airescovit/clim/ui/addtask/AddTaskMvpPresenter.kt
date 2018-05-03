@@ -18,4 +18,6 @@ interface AddTaskMvpPresenter<V : AddTaskMvpView> : MvpPresenter<V> {
 
     fun handleIntent(intent: Intent?)
 
+    fun onTimePicked(hour: Int, minute: Int)
+
 }

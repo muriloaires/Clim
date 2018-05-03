@@ -16,5 +16,7 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val textServiceFee = view.textServiceFee
     val textDia = view.textDia
     val btnReagendar = view.btnReagendar
+    val btnCall = view.btnCall
+    val btnWhatsapp = view.btnWhatsapp
 
 }

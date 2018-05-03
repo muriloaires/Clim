@@ -37,6 +37,7 @@ import br.com.airescovit.clim.ui.tasks.TaskPresenter
 import br.com.airescovit.clim.ui.tasks.TasksMvpView
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 
 /**
  * Created by Logics on 12/01/2018.
@@ -56,6 +57,8 @@ class ActivityModule(activity: AppCompatActivity) {
         return mActivity
     }
 
+    @Provides
+    fun provideCompositeDisposable(): CompositeDisposable = CompositeDisposable()
 
     @PerActivity
     @Provides

@@ -28,4 +28,8 @@ interface ClientsMvpView : MvpView {
 
     fun showTaskFragment()
 
+    fun showDialogNewOrExistent()
+
+    fun openContactPickerActivity()
+
 }

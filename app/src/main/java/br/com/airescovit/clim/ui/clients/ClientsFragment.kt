@@ -2,8 +2,10 @@ package br.com.airescovit.clim.ui.clients
 
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -29,6 +31,7 @@ class ClientsFragment : BaseFragment(), ClientsMvpView {
         }
 
         const val REQUEST_ADD_CLIENT: Int = 1
+        const val RESULT_PICK_CONTACT: Int = 3
     }
 
 
@@ -86,6 +89,54 @@ class ClientsFragment : BaseFragment(), ClientsMvpView {
                     mPresenter.onAddTaskActivityReturn()
                 }
             }
+            RESULT_PICK_CONTACT -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    mPresenter.onContactPicked(data!!.getData())
+                }
+//                val uri = data!!.getData()
+//                //Query the content uri
+//                val cursor = activity?.contentResolver?.query(uri, null, null, null, null)
+//                cursor?.moveToFirst()
+//                // column index of the phone number
+//                val idIndex = cursor?.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID)
+//                // column index of the contact name
+//                val contactId = cursor?.getInt(idIndex!!)
+//                cursor?.close()
+//
+//                val contactCursor = activity?.contentResolver?.query(
+//                        ContactsContract.RawContacts.CONTENT_URI,
+//                        arrayOf(ContactsContract.RawContacts._ID), ContactsContract.RawContacts.CONTACT_ID + "= ?" + "AND " + ContactsContract.RawContacts.ACCOUNT_TYPE + "= ?",
+//                        arrayOf(contactId.toString(), "com.whatsapp"),
+//                        null)
+//
+//                var rawContactId: String? = null
+//                if (contactCursor!!.moveToFirst()) {
+//                    rawContactId = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.RawContacts._ID))
+//                    Log.d("ACC_TYPE", rawContactId)
+//                }
+//                contactCursor.close()
+//
+//                val contactCursor2 = activity?.contentResolver?.query(
+//                        ContactsContract.Data.CONTENT_URI,
+//                        arrayOf(ContactsContract.Data._ID), ContactsContract.Data.RAW_CONTACT_ID + "= ?" + "AND " + ContactsContract.Data.MIMETYPE + "= ?",
+//                        arrayOf(rawContactId, "vnd.android.cursor.item/vnd.com.whatsapp.profile"),
+//                        null)
+//
+//                var whatsappContactId: String? = null
+//                if (contactCursor2!!.moveToFirst()) {
+//                    whatsappContactId = contactCursor2.getString(contactCursor2.getColumnIndex(ContactsContract.Data._ID))
+//                }
+//                contactCursor2.close()
+//
+//                val intent = Intent()
+//                intent.action = Intent.ACTION_VIEW
+//
+//                intent.setDataAndType(Uri.parse("content://com.android.contacts/data/$whatsappContactId"),
+//                        "vnd.android.cursor.item/vnd.com.whatsapp.profile")
+//                intent.`package` = "com.whatsapp"
+//
+//                startActivity(intent)
+            }
 
         }
     }
@@ -126,5 +177,23 @@ class ClientsFragment : BaseFragment(), ClientsMvpView {
 
     override fun showTaskFragment() {
         (getBaseActivity() as MainActivity).selectTaskTab()
+    }
+
+    override fun showDialogNewOrExistent() {
+        val builder = AlertDialog.Builder(activity)
+                .setMessage(R.string.new_or_from_contacts)
+                .setPositiveButton(R.string.contacts, { _, _ ->
+                    mPresenter.onAddFromContactsSelected()
+                })
+                .setNegativeButton(R.string.newclient, { _, _ ->
+                    mPresenter.onNewClientSelected()
+                })
+        builder.show()
+    }
+
+    override fun openContactPickerActivity() {
+        val contactPickerIntent = Intent(Intent.ACTION_PICK,
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI)
+        startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT)
     }
 }

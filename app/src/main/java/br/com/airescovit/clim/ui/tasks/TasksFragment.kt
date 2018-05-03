@@ -133,14 +133,19 @@ class TasksFragment : BaseFragment(), TasksMvpView {
         recyclerTasks.visibility = View.VISIBLE
     }
 
+    override fun openCallActivity(phoneData: Uri) {
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.data = phoneData
+        startActivity(intent)
+    }
 
     override fun openWhatsApp(phone: String) {
-        val contactId = contactIdByPhoneNumber("81036616")
+        val contactId = contactIdByPhoneNumber("981036616")
 
         val contactCursor = activity?.contentResolver?.query(
                 ContactsContract.RawContacts.CONTENT_URI,
                 arrayOf(ContactsContract.RawContacts.CONTACT_ID),
-                ContactsContract.RawContacts.ACCOUNT_TYPE + "= ?" + ContactsContract.Data._ID + "= ?",
+                ContactsContract.RawContacts.ACCOUNT_TYPE + "= ? AND " + ContactsContract.RawContacts._ID + "= ?",
                 arrayOf("com.whatsapp", contactId),
                 null)
 
@@ -182,7 +187,7 @@ class TasksFragment : BaseFragment(), TasksMvpView {
 
             val uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber))
 
-            val projection = arrayOf(PhoneLookup._ID)
+            val projection = arrayOf(ContactsContract.PhoneLookup.CONTACT_ID)
 
             val cursor = contentResolver?.query(uri, projection, null, null, null)
 
@@ -196,5 +201,11 @@ class TasksFragment : BaseFragment(), TasksMvpView {
         return contactId
     }
 
-
+    override fun showWhatsAppProfileActivity(data: Uri, type: String) {
+        val intent = Intent()
+        intent.action = Intent.ACTION_VIEW
+        intent.setDataAndType(data, type)
+        intent.`package` = "com.whatsapp"
+        startActivity(intent)
+    }
 }// Required empty public constructor

@@ -8,15 +8,6 @@ import android.view.ViewGroup
 import br.com.airescovit.clim.R
 import br.com.airescovit.clim.data.db.model.Task
 import br.com.airescovit.clim.ui.base.LoadViewHolder
-import br.com.airescovit.clim.utils.AppConstants
-import java.text.NumberFormat
-import java.text.SimpleDateFormat
-import java.util.*
-import android.support.v4.content.ContextCompat.startActivity
-import android.content.Intent
-import android.provider.ContactsContract
-
-
 
 
 /**
@@ -38,14 +29,15 @@ class TaskAdapter(val mPresenter: TaskMvpPresenter<TasksMvpView>) : RecyclerView
                 mPresenter.onFabClick()
             }
         } else if (holder is TaskViewHolder) {
-            val task = mPresenter.getTasks()[position] as Task
-            holder.textClientName.text = task.client.name
-            holder.textStateCity.text = task.client.address.city + " - " + task.client.address.state
-            holder.textStreetNeighborhood.text = task.client.address.street + " - " + task.client.address.neighborhood
-            holder.textServiceFee.text = NumberFormat.getCurrencyInstance().format(task.serviceFee)
-            holder.textTaskTitle.text = task.title
-            holder.textDia.text = SimpleDateFormat(AppConstants.DATE_FORMAT_EXIBITION, Locale.getDefault()).format(task.startAt)
+            holder.textClientName.text = mPresenter.getClientName(position)
+            holder.textStateCity.text = mPresenter.getClientStateCity(position)
+            holder.textStreetNeighborhood.text = mPresenter.getClientStreetAddress(position)
+            holder.textServiceFee.text = mPresenter.getTaskServiceFee(position)
+            holder.textTaskTitle.text = mPresenter.getTaskTitle(position)
+            holder.textDia.text = mPresenter.getTaskDate(position)
             holder.btnReagendar.setOnClickListener { mPresenter.onBtnReagendarClick(position) }
+            holder.btnCall.setOnClickListener { mPresenter.onBtnCallClick(position) }
+            holder.btnWhatsapp.setOnClickListener { mPresenter.onBtnWhatsappClick(position) }
         }
     }
 
@@ -73,8 +65,6 @@ class TaskAdapter(val mPresenter: TaskMvpPresenter<TasksMvpView>) : RecyclerView
             else -> LOADING
         }
     }
-
-
 
 
 }
